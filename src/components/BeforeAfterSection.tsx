@@ -6,24 +6,56 @@ import beforeAfter1 from '@/assets/before-after-1.jpg';
 import beforeAfter2 from '@/assets/before-after-2.jpg';
 import beforeAfter3 from '@/assets/before-after-3.jpg';
 import beforeAfter4 from '@/assets/before-after-4.jpg';
+import beforeAfter5 from '@/assets/before-after-5.jpg';
+import beforeAfter6 from '@/assets/before-after-6.jpg';
+import beforeAfter7 from '@/assets/before-after-7.jpg';
+import beforeAfter8 from '@/assets/before-after-8.jpg';
+import beforeAfter9 from '@/assets/before-after-9.jpg';
+import beforeAfter10 from '@/assets/before-after-10.jpg';
 
-const images = [
-  { src: beforeAfter1, alt: 'Sedačka pred a po tepovaní - odstránenie fľakov', label: 'Sedačka PRED/PO' },
-  { src: beforeAfter2, alt: 'Koberec pred a po hĺbkovom čistení', label: 'Koberec PRED/PO' },
-  { src: beforeAfter3, alt: 'Čistenie autosedačky tepovačom', label: 'Auto - proces' },
-  { src: beforeAfter4, alt: 'Čistá sedačka po profesionálnom tepovaní', label: 'Výsledok' },
+const pairs = [
+  { 
+    before: { src: beforeAfter1, alt: 'Sivá sedačka pred tepovaním - viditeľné škvrny' },
+    after: { src: beforeAfter2, alt: 'Sivá sedačka po tepovaní - čistá' },
+    label: 'Sivá sedačka'
+  },
+  { 
+    before: { src: beforeAfter3, alt: 'Béžová sedačka pred tepovaním - škvrny na povrchu' },
+    after: { src: beforeAfter4, alt: 'Béžová sedačka po tepovaní - bez škvŕn' },
+    label: 'Béžová sedačka'
+  },
+  { 
+    before: { src: beforeAfter5, alt: 'Biela sedačka pred tepovaním - zašpinená' },
+    after: { src: beforeAfter6, alt: 'Biela sedačka po tepovaní - žiarivá' },
+    label: 'Biela sedačka'
+  },
+  { 
+    before: { src: beforeAfter7, alt: 'Kreslo pred tepovaním - viditeľné znečistenie' },
+    after: { src: beforeAfter8, alt: 'Kreslo po tepovaní - čisté' },
+    label: 'Moderné kreslo'
+  },
+  { 
+    before: { src: beforeAfter9, alt: 'Matrac pred tepovaním - žlté škvrny' },
+    after: { src: beforeAfter10, alt: 'Matrac po tepovaní - čistý biely' },
+    label: 'Matrac'
+  },
 ];
 
 const BeforeAfterSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showAfter, setShowAfter] = useState(false);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
+    setCurrentIndex((prev) => (prev + 1) % pairs.length);
+    setShowAfter(false);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentIndex((prev) => (prev - 1 + pairs.length) % pairs.length);
+    setShowAfter(false);
   };
+
+  const currentPair = pairs[currentIndex];
 
   return (
     <section id="pred-a-po" className="py-20 md:py-28 bg-muted/50">
@@ -39,25 +71,43 @@ const BeforeAfterSection = () => {
           </p>
         </div>
 
-        {/* Main Slider */}
+        {/* Main Slider with Before/After Toggle */}
         <div className="relative max-w-4xl mx-auto">
           <div className="relative overflow-hidden rounded-2xl shadow-card bg-card">
-            <div
-              className="flex transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {images.map((image, index) => (
-                <div key={index} className="min-w-full relative aspect-video">
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute bottom-4 left-4 bg-accent/90 text-sapphire-DEFAULT px-4 py-2 rounded-lg font-semibold text-sm">
-                    {image.label}
-                  </div>
-                </div>
-              ))}
+            {/* Before/After Toggle */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex bg-sapphire-DEFAULT/90 rounded-full p-1 backdrop-blur-sm">
+              <button
+                onClick={() => setShowAfter(false)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  !showAfter 
+                    ? 'bg-accent text-sapphire-DEFAULT' 
+                    : 'text-primary-foreground hover:text-accent'
+                }`}
+              >
+                PRED
+              </button>
+              <button
+                onClick={() => setShowAfter(true)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  showAfter 
+                    ? 'bg-accent text-sapphire-DEFAULT' 
+                    : 'text-primary-foreground hover:text-accent'
+                }`}
+              >
+                PO
+              </button>
+            </div>
+
+            {/* Image Container */}
+            <div className="relative aspect-video">
+              <img
+                src={showAfter ? currentPair.after.src : currentPair.before.src}
+                alt={showAfter ? currentPair.after.alt : currentPair.before.alt}
+                className="w-full h-full object-cover transition-opacity duration-500"
+              />
+              <div className="absolute bottom-4 left-4 bg-accent/90 text-sapphire-DEFAULT px-4 py-2 rounded-lg font-semibold text-sm">
+                {currentPair.label} - {showAfter ? 'PO' : 'PRED'}
+              </div>
             </div>
 
             {/* Navigation arrows */}
@@ -79,10 +129,13 @@ const BeforeAfterSection = () => {
 
           {/* Dots indicator */}
           <div className="flex justify-center gap-2 mt-6">
-            {images.map((_, index) => (
+            {pairs.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => {
+                  setCurrentIndex(index);
+                  setShowAfter(false);
+                }}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                   index === currentIndex
                     ? 'bg-accent w-8'
@@ -94,12 +147,15 @@ const BeforeAfterSection = () => {
           </div>
         </div>
 
-        {/* Thumbnail grid */}
-        <div className="grid grid-cols-4 gap-2 md:gap-4 mt-8 max-w-2xl mx-auto">
-          {images.map((image, index) => (
+        {/* Thumbnail grid - showing BEFORE images */}
+        <div className="grid grid-cols-5 gap-2 md:gap-4 mt-8 max-w-3xl mx-auto">
+          {pairs.map((pair, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => {
+                setCurrentIndex(index);
+                setShowAfter(false);
+              }}
               className={`relative aspect-square rounded-lg overflow-hidden transition-all duration-300 ${
                 index === currentIndex
                   ? 'ring-2 ring-accent ring-offset-2 ring-offset-background'
@@ -107,8 +163,8 @@ const BeforeAfterSection = () => {
               }`}
             >
               <img
-                src={image.src}
-                alt={image.alt}
+                src={pair.before.src}
+                alt={pair.before.alt}
                 className="w-full h-full object-cover"
               />
             </button>
