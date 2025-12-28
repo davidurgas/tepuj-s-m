@@ -1,4 +1,4 @@
-import { Check, Clock, Droplets, Shield } from 'lucide-react';
+import { Check, Clock, Droplets, Shield, Truck } from 'lucide-react';
 
 const features = [
   { icon: Droplets, text: 'Profesionálna chémia v cene' },
@@ -79,6 +79,23 @@ const PricingSection = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Delivery option */}
+          <div className="bg-accent/10 border border-accent/30 rounded-2xl p-6 mb-8">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center md:text-left">
+              <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
+                <Truck className="w-6 h-6 text-accent" />
+              </div>
+              <div>
+                <p className="text-primary-foreground font-semibold text-lg">
+                  Dovezieme vám stroj až domov! <span className="text-accent">+10€</span>
+                </p>
+                <p className="text-primary-foreground/70 text-sm">
+                  Dovoz a odvoz v rámci celej Bratislavy. Nemusíte nikam chodiť.
+                </p>
               </div>
             </div>
           </div>
