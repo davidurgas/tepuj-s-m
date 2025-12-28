@@ -2,9 +2,8 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 import logo from '@/assets/logo.png';
 
 const navLinks = [
-  { href: '#vyhody', label: 'Výhody' },
-  { href: '#ako-to-funguje', label: 'Ako to funguje' },
-  { href: '#pred-a-po', label: 'Pred a Po' },
+  { href: '#ako-to-funguje', label: 'Ako požičať stroj' },
+  { href: '#pred-a-po', label: 'Výsledky' },
   { href: '#cennik', label: 'Cenník' },
   { href: '#recenzie', label: 'Recenzie' },
   { href: '#faq', label: 'FAQ' },
