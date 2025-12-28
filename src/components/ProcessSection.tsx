@@ -1,4 +1,4 @@
-import { CalendarCheck, MapPin, Sparkles } from 'lucide-react';
+import { CalendarCheck, MapPin, Sparkles, Truck } from 'lucide-react';
 
 const steps = [
   {
@@ -10,14 +10,14 @@ const steps = [
   {
     number: '02',
     icon: MapPin,
-    title: 'Vyzdvihnite si ho (Bratislava).',
-    description: 'Stroj bude pre vás pripravený na adrese Námestie Hraničiarov 35, Petržalka. Dostanete rýchlu inštruktáž a chémiu na mieru.',
+    title: 'Vyzdvihnite si ho alebo vám ho dovezieme.',
+    description: 'Stroj si môžete vyzdvihnúť na adrese Námestie Hraničiarov 35, Petržalka, alebo vám ho dovezieme za +10€.',
   },
   {
     number: '03',
     icon: Sparkles,
     title: 'Tepujte a vráťte.',
-    description: 'Užite si 12 hodín čistenia. Potom nám stroj jednoducho vrátite.',
+    description: 'Užite si čistenie. Potom nám stroj jednoducho vrátite alebo ho od vás vyzdvihneme.',
   },
 ];
 
