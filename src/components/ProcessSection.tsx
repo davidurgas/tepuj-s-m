@@ -11,7 +11,7 @@ const steps = [
     number: '02',
     icon: MapPin,
     title: 'Vyzdvihnite si ho (Bratislava).',
-    description: 'Stroj bude pre vás pripravený na našom odbernom mieste. Dostanete rýchlu inštruktáž a chémiu na mieru.',
+    description: 'Stroj bude pre vás pripravený na adrese Námestie Hraničiarov 35, Petržalka. Dostanete rýchlu inštruktáž a chémiu na mieru.',
   },
   {
     number: '03',

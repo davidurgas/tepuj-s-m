@@ -76,11 +76,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <div className="flex items-center gap-3 text-secondary-foreground/70">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                <div className="flex items-start gap-3 text-secondary-foreground/70">
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-5 h-5 text-accent" />
                   </div>
-                  <span>Odberné miesto: Bratislava</span>
+                  <span>Námestie Hraničiarov 35,<br />Bratislava - Petržalka</span>
                 </div>
               </li>
             </ul>
