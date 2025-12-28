@@ -3,9 +3,8 @@ import { Menu, X } from 'lucide-react';
 import logo from '@/assets/logo.png';
 
 const navLinks = [
-  { href: '#vyhody', label: 'Výhody' },
-  { href: '#ako-to-funguje', label: 'Ako to funguje' },
-  { href: '#pred-a-po', label: 'Pred a Po' },
+  { href: '#ako-to-funguje', label: 'Ako požičať stroj' },
+  { href: '#pred-a-po', label: 'Výsledky' },
   { href: '#cennik', label: 'Cenník' },
   { href: '#recenzie', label: 'Recenzie' },
   { href: '#faq', label: 'FAQ' },
@@ -36,7 +35,7 @@ const Navigation = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-sapphire-DEFAULT/95 backdrop-blur-md shadow-lg py-2'
+          ? 'bg-card/98 backdrop-blur-md shadow-lg py-2'
           : 'bg-transparent py-4'
       }`}
     >
@@ -52,7 +51,11 @@ const Navigation = () => {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-primary-foreground/80 hover:text-accent transition-colors duration-300 text-sm font-medium"
+              className={`transition-colors duration-300 text-sm font-medium ${
+                isScrolled 
+                  ? 'text-foreground hover:text-accent' 
+                  : 'text-primary-foreground/90 hover:text-accent'
+              }`}
             >
               {link.label}
             </a>
@@ -68,7 +71,7 @@ const Navigation = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden text-primary-foreground p-2"
+          className={`lg:hidden p-2 ${isScrolled ? 'text-foreground' : 'text-primary-foreground'}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
