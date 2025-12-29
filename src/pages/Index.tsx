@@ -7,6 +7,7 @@ import PricingSection from '@/components/PricingSection';
 import ReviewsSection from '@/components/ReviewsSection';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
       <ReviewsSection />
       <FAQSection />
       <Footer />
+      <WhatsAppButton />
     </main>
   );
 };
