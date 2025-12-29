@@ -35,7 +35,7 @@ const Navigation = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-sapphire-DEFAULT backdrop-blur-md shadow-lg py-2'
+          ? 'bg-white/95 backdrop-blur-md shadow-lg py-2'
           : 'bg-transparent py-4'
       }`}
     >
@@ -51,8 +51,8 @@ const Navigation = () => {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`transition-colors duration-300 text-sm font-medium hover:text-accent ${
-                isScrolled ? 'text-white' : 'text-white'
+              className={`transition-colors duration-300 text-sm font-medium ${
+                isScrolled ? 'text-sapphire-DEFAULT hover:text-accent' : 'text-white hover:text-accent'
               }`}
             >
               {link.label}
@@ -69,7 +69,7 @@ const Navigation = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className={`lg:hidden p-2 ${isScrolled ? 'text-white' : 'text-white'}`}
+          className={`lg:hidden p-2 ${isScrolled ? 'text-sapphire-DEFAULT' : 'text-white'}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
