@@ -28,11 +28,27 @@
         </p>
         
         <div class="hero-buttons animate-fade-up animation-delay-300">
-            <a href="#cennik" class="btn btn-primary">Rezervovať teraz</a>
+            <a href="#cennik" class="btn btn-primary animate-pulse-glow">Rezervovať teraz</a>
             <a href="#postup" class="btn btn-outline">Ako to funguje?</a>
         </div>
         
-        <div class="hero-stats animate-fade-up animation-delay-400">
+        <!-- Trust Badges -->
+        <div class="hero-trust-badges animate-fade-up animation-delay-400">
+            <div class="trust-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                <span>Profesionálny stroj Kärcher</span>
+            </div>
+            <div class="trust-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span>Rýchle vyzdvihnutie</span>
+            </div>
+            <div class="trust-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z"></path><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"></path></svg>
+                <span>Podpora počas prenájmu</span>
+            </div>
+        </div>
+        
+        <div class="hero-stats animate-fade-up animation-delay-500">
             <div class="hero-stat">
                 <div class="hero-stat-value">70%</div>
                 <div class="hero-stat-label">Úspora nákladov</div>
@@ -46,6 +62,12 @@
                 <div class="hero-stat-label">Hodnotenie</div>
             </div>
         </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="hero-scroll-indicator">
+        <span>Posunúť nadol</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </div>
 </section>
 
@@ -131,25 +153,65 @@
     </div>
 </section>
 
-<!-- Gallery Section -->
-<section class="section" id="galeria">
+<!-- Gallery Section - Before/After Slider -->
+<section class="section section-muted" id="galeria">
     <div class="container">
         <div class="section-header">
             <span class="section-badge">Galéria</span>
-            <h2 class="section-title">Pred a po</h2>
-            <p class="section-description">Pozrite si reálne výsledky našich zákazníkov</p>
+            <h2 class="section-title">Pozrite sa, čo <span class="text-cyan">dokážete sami.</span></h2>
+            <p class="section-description">Reálne výsledky od našich zákazníkov v Bratislave. Tieto fotky nie sú od profesionálov – sú od ľudí ako vy.</p>
         </div>
         
-        <div class="gallery-grid">
-            <?php for ($i = 1; $i <= 6; $i++): ?>
-            <div class="gallery-item">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/before-after-<?php echo $i; ?>.jpg" 
-                     alt="Pred a po <?php echo $i; ?>">
+        <!-- Main Slider -->
+        <div class="gallery-slider">
+            <div class="gallery-slider-main">
+                <!-- Before/After Toggle -->
+                <div class="gallery-toggle">
+                    <button class="gallery-toggle-btn active" data-show="before">PRED</button>
+                    <button class="gallery-toggle-btn" data-show="after">PO</button>
+                </div>
+                
+                <!-- Image Container -->
+                <div class="gallery-slider-image">
+                    <img id="gallery-main-image" 
+                         src="<?php echo get_template_directory_uri(); ?>/assets/images/before-after-1.jpg" 
+                         alt="Pred čistením">
+                    <div class="gallery-image-label" id="gallery-label">Sivá sedačka - PRED</div>
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button class="gallery-nav gallery-nav-prev" aria-label="Predchádzajúci obrázok">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="gallery-nav gallery-nav-next" aria-label="Ďalší obrázok">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
             </div>
-            <?php endfor; ?>
+            
+            <!-- Dots Indicator -->
+            <div class="gallery-dots" id="gallery-dots">
+                <!-- Generated by JS -->
+            </div>
+            
+            <!-- Thumbnails -->
+            <div class="gallery-thumbnails" id="gallery-thumbnails">
+                <!-- Generated by JS -->
+            </div>
         </div>
     </div>
 </section>
+
+<script>
+// Gallery Slider Data
+const galleryPairs = [
+    { before: 'before-after-1.jpg', after: 'before-after-2.jpg', label: 'Sivá sedačka' },
+    { before: 'before-after-3.jpg', after: 'before-after-4.jpg', label: 'Béžová sedačka' },
+    { before: 'before-after-5.jpg', after: 'before-after-6.jpg', label: 'Biela sedačka' },
+    { before: 'before-after-7.jpg', after: 'before-after-8.jpg', label: 'Moderné kreslo' },
+    { before: 'before-after-9.jpg', after: 'before-after-10.jpg', label: 'Matrac' }
+];
+const galleryBasePath = '<?php echo get_template_directory_uri(); ?>/assets/images/';
+</script>
 
 <!-- Pricing Section -->
 <section class="section section-light" id="cennik">
