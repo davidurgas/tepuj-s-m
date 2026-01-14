@@ -91,7 +91,102 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
     
     // Observe elements for animation
-    document.querySelectorAll('.benefit-card, .process-step, .gallery-item, .pricing-card, .review-card, .faq-item').forEach(function(el) {
+    document.querySelectorAll('.benefit-card, .process-step, .gallery-slider, .pricing-card, .review-card, .faq-item').forEach(function(el) {
         observer.observe(el);
     });
+    
+    // ===== Before/After Gallery Slider =====
+    if (typeof galleryPairs !== 'undefined' && galleryPairs.length > 0) {
+        let currentSlide = 0;
+        let showAfter = false;
+        
+        const mainImage = document.getElementById('gallery-main-image');
+        const labelEl = document.getElementById('gallery-label');
+        const dotsContainer = document.getElementById('gallery-dots');
+        const thumbsContainer = document.getElementById('gallery-thumbnails');
+        const toggleBtns = document.querySelectorAll('.gallery-toggle-btn');
+        const prevBtn = document.querySelector('.gallery-nav-prev');
+        const nextBtn = document.querySelector('.gallery-nav-next');
+        
+        // Generate dots
+        galleryPairs.forEach(function(pair, index) {
+            const dot = document.createElement('button');
+            dot.className = 'gallery-dot' + (index === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Prejsť na obrázok ' + (index + 1));
+            dot.addEventListener('click', function() {
+                goToSlide(index);
+            });
+            dotsContainer.appendChild(dot);
+        });
+        
+        // Generate thumbnails
+        galleryPairs.forEach(function(pair, index) {
+            const thumb = document.createElement('button');
+            thumb.className = 'gallery-thumbnail' + (index === 0 ? ' active' : '');
+            thumb.innerHTML = '<img src="' + galleryBasePath + pair.before + '" alt="' + pair.label + '">';
+            thumb.addEventListener('click', function() {
+                goToSlide(index);
+            });
+            thumbsContainer.appendChild(thumb);
+        });
+        
+        function updateSlide() {
+            const pair = galleryPairs[currentSlide];
+            const imageSrc = showAfter ? pair.after : pair.before;
+            mainImage.src = galleryBasePath + imageSrc;
+            labelEl.textContent = pair.label + ' - ' + (showAfter ? 'PO' : 'PRED');
+            
+            // Update dots
+            document.querySelectorAll('.gallery-dot').forEach(function(dot, i) {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+            
+            // Update thumbnails
+            document.querySelectorAll('.gallery-thumbnail').forEach(function(thumb, i) {
+                thumb.classList.toggle('active', i === currentSlide);
+            });
+            
+            // Update toggle buttons
+            toggleBtns.forEach(function(btn) {
+                const isAfter = btn.dataset.show === 'after';
+                btn.classList.toggle('active', isAfter === showAfter);
+            });
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            showAfter = false;
+            updateSlide();
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % galleryPairs.length;
+            showAfter = false;
+            updateSlide();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + galleryPairs.length) % galleryPairs.length;
+            showAfter = false;
+            updateSlide();
+        }
+        
+        // Toggle buttons
+        toggleBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                showAfter = btn.dataset.show === 'after';
+                updateSlide();
+            });
+        });
+        
+        // Navigation
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+    }
 });
