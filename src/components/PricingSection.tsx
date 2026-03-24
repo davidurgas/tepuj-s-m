@@ -106,31 +106,16 @@ const PricingSection = () => {
             <span>Pri prevzatí sa skladá vratná záloha 200€ v hotovosti</span>
           </div>
 
-          {/* AMELIA Booking Container */}
+          {/* TidyCal Booking */}
           <div className="bg-card rounded-2xl p-8 md:p-12 shadow-card">
             <h3 className="text-2xl font-bold text-foreground text-center mb-6">
-              Vyberte si termín
+              Rezervujte si termín
             </h3>
             
             <div
-              id="amelia-booking-container"
-              className="min-h-[400px] bg-muted/30 rounded-xl flex items-center justify-center border-2 border-dashed border-border"
-            >
-              {/* AMELIA BOOKING SHORTCODE: [ameliaevents] */}
-              <div className="text-center p-8">
-                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <p className="text-muted-foreground">
-                  Rezervačný systém AMELIA sa načíta tu.
-                </p>
-                <p className="text-sm text-muted-foreground/70 mt-2">
-                  [ameliaevents]
-                </p>
-              </div>
-            </div>
+              className="tidycal-embed"
+              data-path="tepujsi/4hodiny-osobnyodber"
+            />
           </div>
         </div>
       </div>

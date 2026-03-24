@@ -94,18 +94,18 @@ const Footer = () => {
             © 2024 Tepujsi.sk - Najlepšia požičovňa tepovačov v Bratislave. Všetky práva vyhradené.
           </p>
           <div className="flex items-center gap-4">
-            <a
-              href="#"
+            <Link
+              to="/obchodne-podmienky"
               className="text-secondary-foreground/50 hover:text-accent text-sm transition-colors duration-300"
             >
               Obchodné podmienky
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/ochrana-sukromia"
               className="text-secondary-foreground/50 hover:text-accent text-sm transition-colors duration-300"
             >
               Ochrana súkromia
-            </a>
+            </Link>
           </div>
         </div>
       </div>
