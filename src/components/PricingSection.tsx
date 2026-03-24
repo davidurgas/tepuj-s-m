@@ -7,6 +7,20 @@ const features = [
 ];
 
 const PricingSection = () => {
+  const tidycalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!tidycalRef.current) return;
+    // Remove any existing script to avoid duplicates
+    const existingScript = document.querySelector('script[src*="tidycal"]');
+    if (existingScript) existingScript.remove();
+    
+    const script = document.createElement('script');
+    script.src = 'https://asset-tidycal.b-cdn.net/js/embed.js';
+    script.async = true;
+    tidycalRef.current.appendChild(script);
+  }, []);
+
   return (
     <section id="cennik" className="py-20 md:py-28 bg-primary-gradient">
       <div className="container mx-auto px-4">
