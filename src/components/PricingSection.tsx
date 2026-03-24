@@ -122,7 +122,7 @@ const PricingSection = () => {
           </div>
 
           {/* TidyCal Booking */}
-          <div className="bg-card rounded-2xl p-8 md:p-12 shadow-card">
+          <div ref={tidycalRef} className="bg-card rounded-2xl p-8 md:p-12 shadow-card">
             <h3 className="text-2xl font-bold text-foreground text-center mb-6">
               Rezervujte si termín
             </h3>
