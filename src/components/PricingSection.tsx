@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Check, Clock, Droplets, Shield, Truck } from 'lucide-react';
 
 const features = [
