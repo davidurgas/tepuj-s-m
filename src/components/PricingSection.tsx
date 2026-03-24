@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Check, Clock, Droplets, Shield, Truck } from 'lucide-react';
 
 const features = [
@@ -6,11 +6,26 @@ const features = [
   { icon: Shield, text: 'Stroj typu Kärcher' },
 ];
 
+const bookingOptions = [
+  { id: 'osobny', label: 'Osobný odber', path: 'tepujsi/4hodiny-osobnyodber', icon: Clock },
+  { id: 'dovoz', label: 'S dovozom (+10€)', path: 'tepujsi/4-hodiny-s-dovozom', icon: Truck },
+];
+
 const PricingSection = () => {
   const tidycalRef = useRef<HTMLDivElement>(null);
+  const [selectedOption, setSelectedOption] = useState('osobny');
 
   useEffect(() => {
     if (!tidycalRef.current) return;
+    // Clear previous embed
+    tidycalRef.current.innerHTML = '';
+    
+    const selected = bookingOptions.find(o => o.id === selectedOption)!;
+    const embedDiv = document.createElement('div');
+    embedDiv.className = 'tidycal-embed';
+    embedDiv.setAttribute('data-path', selected.path);
+    tidycalRef.current.appendChild(embedDiv);
+
     // Remove any existing script to avoid duplicates
     const existingScript = document.querySelector('script[src*="tidycal"]');
     if (existingScript) existingScript.remove();
@@ -19,7 +34,7 @@ const PricingSection = () => {
     script.src = 'https://asset-tidycal.b-cdn.net/js/embed.js';
     script.async = true;
     tidycalRef.current.appendChild(script);
-  }, []);
+  }, [selectedOption]);
 
   return (
     <section id="cennik" className="py-20 md:py-28 bg-primary-gradient">
@@ -122,15 +137,32 @@ const PricingSection = () => {
           </div>
 
           {/* TidyCal Booking */}
-          <div ref={tidycalRef} className="bg-card rounded-2xl p-8 md:p-12 shadow-card">
+          <div className="bg-card rounded-2xl p-8 md:p-12 shadow-card">
             <h3 className="text-2xl font-bold text-foreground text-center mb-6">
               Rezervujte si termín
             </h3>
             
-            <div
-              className="tidycal-embed"
-              data-path="tepujsi/4hodiny-osobnyodber"
-            />
+            {/* Booking type toggle */}
+            <div className="flex justify-center mb-8">
+              <div className="inline-flex bg-muted rounded-xl p-1.5 gap-1">
+                {bookingOptions.map((option) => (
+                  <button
+                    key={option.id}
+                    onClick={() => setSelectedOption(option.id)}
+                    className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                      selectedOption === option.id
+                        ? 'bg-accent text-accent-foreground shadow-md'
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    <option.icon className="w-4 h-4" />
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div ref={tidycalRef} />
           </div>
         </div>
       </div>
