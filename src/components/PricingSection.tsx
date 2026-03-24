@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Check, Clock, Droplets, Shield, Truck } from 'lucide-react';
 
 const features = [
@@ -6,6 +7,20 @@ const features = [
 ];
 
 const PricingSection = () => {
+  const tidycalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!tidycalRef.current) return;
+    // Remove any existing script to avoid duplicates
+    const existingScript = document.querySelector('script[src*="tidycal"]');
+    if (existingScript) existingScript.remove();
+    
+    const script = document.createElement('script');
+    script.src = 'https://asset-tidycal.b-cdn.net/js/embed.js';
+    script.async = true;
+    tidycalRef.current.appendChild(script);
+  }, []);
+
   return (
     <section id="cennik" className="py-20 md:py-28 bg-primary-gradient">
       <div className="container mx-auto px-4">
@@ -107,7 +122,7 @@ const PricingSection = () => {
           </div>
 
           {/* TidyCal Booking */}
-          <div className="bg-card rounded-2xl p-8 md:p-12 shadow-card">
+          <div ref={tidycalRef} className="bg-card rounded-2xl p-8 md:p-12 shadow-card">
             <h3 className="text-2xl font-bold text-foreground text-center mb-6">
               Rezervujte si termín
             </h3>
