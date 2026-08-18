@@ -5,6 +5,7 @@ name: Deploy Droply demo to GitHub Pages
 on:
   push:
     branches:
+      - main
       - claude/droply-cleaning-tablets-eshop-cd0mxu
   workflow_dispatch:
 
