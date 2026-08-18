@@ -1,73 +1,45 @@
-# Welcome to your Lovable project
+# Droply — demo eshop
 
-## Project info
+Moderný, interaktívny demo eshop pre značku **Droply** — ekologické šumivé
+čistiace tablety rozpustné vo vode. Menej plastu, menej miesta, žiadne ťahanie
+litrov z obchodu — rovnaká čistota.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+> ⚠️ Ide o **demo**. Platobná brána nie je aktívna; tlačidlo „Prejsť k pokladni“
+> len simuluje objednávku.
 
-## How can I edit this code?
+## Čo eshop obsahuje
 
-There are several ways of editing your application.
+- **Hero** so živým vizuálom rozpúšťajúcej sa tablety vo vode.
+- **Scroll efekt „Ako to funguje“** — pri scrollovaní sa tableta postupne
+  rozpúšťa (sticky sekcia riadená pozíciou scrollu).
+- **Výhody** (ekológia, úspora miesta, žiadne nosenie litrov, úspora peňazí…).
+- **Interaktívna kalkulačka úspor** — koľko plastu, hmotnosti a peňazí ušetríš.
+- **Porovnanie** klasické fľaše vs. Droply tablety.
+- **Produkty** s pridávaním do košíka, hodnoteniami a indikátorom skladu.
+- **Cenník / balíčky** s odpočtom uvádzacej ponuky (psychológia predaja:
+  kotvenie cien, vzácnosť, urgentnosť, „najobľúbenejšia voľba“).
+- **Ekologický dopad** s animovanými počítadlami.
+- **Recenzie**, **FAQ**, **newsletter** so zľavovým kódom.
+- **Košík (drawer)** s progresom „doprava zdarma“.
 
-**Use Lovable**
+## Prvky psychológie predaja
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Social proof (recenzie, hodnotenia), kotvenie (prečiarknuté ceny), vzácnosť
+(stav skladu, „posledné kusy“), urgentnosť (odpočet), reciprocita (darček/zľava),
+znižovanie rizika (30 dní na vrátenie, doprava zdarma) a decoy pricing v balíčkoch.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Technológie
 
-**Use your preferred IDE**
+Vite · React · TypeScript · Tailwind CSS · shadcn/ui · lucide-react
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Spustenie
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+bun install      # alebo: npm install
+bun run dev      # vývojový server
+bun run build    # produkčný build
+bun run preview  # náhľad buildu
 ```
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Hlavná stránka: `src/pages/Index.tsx`. Sekcie eshopu: `src/components/droply/`.
+Obsah (produkty, balíčky, recenzie, FAQ): `src/lib/droply-data.ts`.

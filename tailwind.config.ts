@@ -7,15 +7,15 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.5rem",
       screens: {
         "2xl": "1400px",
       },
     },
     extend: {
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Sora", "Inter", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -44,6 +44,14 @@ export default {
           foreground: "hsl(var(--accent-foreground))",
           glow: "hsl(var(--accent-glow))",
         },
+        eco: {
+          DEFAULT: "hsl(var(--eco))",
+          foreground: "hsl(var(--eco-foreground))",
+        },
+        sunny: {
+          DEFAULT: "hsl(var(--sunny))",
+          foreground: "hsl(var(--sunny-foreground))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -52,48 +60,19 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Tepujsi.sk Brand Colors
-        sapphire: {
-          DEFAULT: "#0A2342",
-          50: "#1A3A5C",
-          100: "#153152",
-          200: "#0F2847",
-          300: "#0A2342",
-          400: "#081C35",
-          500: "#061528",
-        },
-        cyan: {
-          DEFAULT: "#00D2E6",
-          50: "#E5FBFD",
-          100: "#B3F4F9",
-          200: "#66E9F3",
-          300: "#1ADFED",
-          400: "#00D2E6",
-          500: "#00A8B8",
-          glow: "#33DCF0",
-        },
-        charcoal: {
-          DEFAULT: "#2E2E2E",
-          50: "#4A4A4A",
-          100: "#3C3C3C",
-          200: "#2E2E2E",
-          300: "#252525",
-          400: "#1C1C1C",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-        xl: "1rem",
-        "2xl": "1.5rem",
+        md: "calc(var(--radius) - 4px)",
+        sm: "calc(var(--radius) - 8px)",
+        xl: "1.25rem",
+        "2xl": "1.75rem",
+        "3xl": "2.25rem",
       },
       boxShadow: {
-        'accent': '0 10px 40px -10px hsl(185 100% 45% / 0.4)',
-        'accent-hover': '0 20px 50px -15px hsl(185 100% 45% / 0.5)',
-        'card': '0 4px 30px -8px hsl(213 75% 15% / 0.15)',
-        'card-hover': '0 8px 40px -10px hsl(213 75% 15% / 0.2)',
-        'glow': '0 0 30px hsl(185 100% 45% / 0.3), 0 0 60px hsl(185 100% 45% / 0.15)',
+        card: "0 10px 40px -18px hsl(205 60% 25% / 0.28)",
+        hover: "0 26px 60px -22px hsl(205 80% 35% / 0.45)",
+        glow: "0 0 0 1px hsl(187 92% 60% / 0.25), 0 18px 50px -18px hsl(187 92% 50% / 0.55)",
       },
       keyframes: {
         "accordion-down": {
@@ -104,35 +83,32 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "fade-up": {
-          from: { opacity: "0", transform: "translateY(30px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
+        rise: {
+          "0%": { transform: "translateY(0) scale(1)", opacity: "0" },
+          "10%": { opacity: "0.9" },
+          "100%": { transform: "translateY(-120px) scale(0.4)", opacity: "0" },
         },
-        "fade-in": {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
-        },
-        "scale-in": {
-          from: { opacity: "0", transform: "scale(0.9)" },
-          to: { opacity: "1", transform: "scale(1)" },
-        },
-        "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(185 100% 45% / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(185 100% 45% / 0.5), 0 0 60px hsl(185 100% 45% / 0.2)" },
-        },
-        "float": {
+        floaty: {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
+          "50%": { transform: "translateY(-14px)" },
+        },
+        wobble: {
+          "0%, 100%": { transform: "rotate(-2deg)" },
+          "50%": { transform: "rotate(2deg)" },
+        },
+        "spin-slow": { to: { transform: "rotate(360deg)" } },
+        "pop-in": {
+          "0%": { opacity: "0", transform: "scale(0.85)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-up": "fade-up 0.6s ease-out forwards",
-        "fade-in": "fade-in 0.6s ease-out forwards",
-        "scale-in": "scale-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "float": "float 3s ease-in-out infinite",
+        floaty: "floaty 4s ease-in-out infinite",
+        wobble: "wobble 3s ease-in-out infinite",
+        "spin-slow": "spin-slow 14s linear infinite",
+        "pop-in": "pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
       },
     },
   },
