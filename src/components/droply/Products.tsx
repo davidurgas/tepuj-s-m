@@ -132,12 +132,14 @@ export default function Products() {
   return (
     <section id="produkty" className="relative py-20 sm:py-28">
       <div className="container-tight">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-bold uppercase tracking-wider text-accent">Sortiment</span>
-          <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
-            Jedna tableta pre každú <span className="text-gradient">miestnosť</span>
-          </h2>
-          <p className="mt-3 text-muted-foreground">
+        <Reveal className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <span className="kicker">04 — Sortiment</span>
+            <h2 className="mt-4 max-w-xl font-display text-3xl font-bold leading-tight sm:text-5xl">
+              Jedna tableta pre každú <span className="font-accent text-primary">miestnosť</span>
+            </h2>
+          </div>
+          <p className="max-w-xs text-sm text-muted-foreground">
             Vyskladaj si vlastnú sadu. Každé balenie obsahuje 10 šumivých tabliet a vydrží mesiace.
           </p>
         </Reveal>

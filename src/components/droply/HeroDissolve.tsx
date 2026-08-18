@@ -1,210 +1,115 @@
 import { useEffect, useRef, useState } from "react";
-import { Star, Leaf, ShieldCheck, Droplets, ArrowRight, ChevronDown, Check } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import { DISSOLVE_VIDEO } from "@/lib/droply-data";
 
-const STEPS = [
-  { title: "Naplň fľašu vodou", text: "Obyčajná voda z vodovodu do dávkovacej fľaše." },
-  { title: "Vhoď tabletu Droply", text: "Tableta začne šumieť a rozpúšťať sa vo vode." },
-  { title: "Hotovo — môžeš čistiť", text: "O dve minúty máš plnohodnotný čistiaci prostriedok." },
-];
-
+/**
+ * Hero s reálnym videom rozpúšťania tablety v čistiacej fľaši.
+ * Video sa prehráva plynulo v slučke (žiadne scrubovanie = žiadne sekanie),
+ * s jemným parallaxom na scroll pre hĺbku.
+ */
 export default function HeroDissolve() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const durationRef = useRef(0);
-  const unlockedRef = useRef(false);
-  const [progress, setProgress] = useState(0);
-
-  // odomknutie prehrávania na mobile (iOS vyžaduje interakciu na seek)
-  const unlock = () => {
-    const v = videoRef.current;
-    if (!v || unlockedRef.current) return;
-    unlockedRef.current = true;
-    v.play().then(() => v.pause()).catch(() => {});
-  };
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    const onMeta = () => (durationRef.current = v.duration || 5);
-    v.addEventListener("loadedmetadata", onMeta);
-
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) {
-      v.loop = true;
-      v.play().catch(() => {});
-      return () => v.removeEventListener("loadedmetadata", onMeta);
-    }
-
+    if (prefersReduced) return;
     let ticking = false;
-    const compute = () => {
-      const el = sectionRef.current;
-      if (el) {
-        const rect = el.getBoundingClientRect();
-        const total = el.offsetHeight - window.innerHeight;
-        const p = total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 0;
-        setProgress(p);
-        const dur = durationRef.current || v.duration || 5;
-        if (dur) {
-          const t = Math.min(p * dur, dur - 0.05);
-          if (Math.abs((v.currentTime || 0) - t) > 0.03) {
-            try {
-              v.currentTime = t;
-            } catch {
-              /* seek not ready */
-            }
-          }
-        }
-      }
-      ticking = false;
-    };
     const onScroll = () => {
-      unlock();
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(compute);
-      }
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const el = wrapRef.current;
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          setOffset(Math.max(-1, Math.min(1, -rect.top / window.innerHeight)));
+        }
+        ticking = false;
+      });
     };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    window.addEventListener("touchstart", unlock, { passive: true });
-    compute();
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      window.removeEventListener("touchstart", unlock);
-      v.removeEventListener("loadedmetadata", onMeta);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const heroOpacity = progress < 0.26 ? 1 : Math.max(0, 1 - (progress - 0.26) / 0.16);
-  const stepsOpacity = progress < 0.2 ? 0 : Math.min(1, (progress - 0.2) / 0.14);
-  const activeStep = progress < 0.42 ? 0 : progress < 0.74 ? 1 : 2;
-
   return (
-    <section id="top" ref={sectionRef} className="relative" style={{ height: "260vh" }}>
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {/* Reálne video – rozpúšťanie tablety vo vode */}
-        <video
-          ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover"
-          src={DISSOLVE_VIDEO}
-          muted
-          playsInline
-          preload="auto"
-          // @ts-expect-error – webkit atribút pre iOS
-          webkit-playsinline="true"
-        />
+    <section id="top" ref={wrapRef} className="relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-secondary">
+      {/* Reálne video – plynulá slučka */}
+      <video
+        className="absolute inset-0 h-[118%] w-full object-cover"
+        style={{ transform: `translateY(${offset * 8}%) scale(1.05)` }}
+        src={DISSOLVE_VIDEO}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        // @ts-expect-error iOS atribút
+        webkit-playsinline="true"
+      />
 
-        {/* Prekrytie pre čitateľnosť */}
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/85 via-secondary/45 to-secondary/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary/70 via-transparent to-transparent" />
+      {/* Editorial prekrytie */}
+      <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/45 to-secondary/70" />
+      <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 via-secondary/10 to-transparent" />
 
-        {/* Obsah hero */}
-        <div
-          className="absolute inset-0 flex flex-col justify-center px-5 text-white sm:px-10"
-          style={{ opacity: heroOpacity, transition: "opacity 0.15s linear" }}
-        >
-          <div className="container-tight">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
-              <Leaf className="h-4 w-4 text-eco" />
-              Ekologické čistenie novej generácie
-            </span>
+      {/* Obsah */}
+      <div className="relative z-10 flex h-full flex-col">
+        {/* horný label riadok */}
+        <div className="container-tight flex items-center justify-between pt-24 text-white/70">
+          <span className="kicker !text-white/70 before:!bg-accent">01 — Šumivé čistiace tablety</span>
+          <span className="hidden text-xs font-medium uppercase tracking-[0.18em] text-white/50 sm:block">
+            Rozpustné vo vode · Bez plastu navyše
+          </span>
+        </div>
 
-            <h1 className="mt-5 max-w-3xl font-display text-4xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl">
-              Čistá domácnosť.
-              <br />
-              <span className="bg-gradient-to-r from-accent via-accent-glow to-eco bg-clip-text text-transparent">
-                Bez zbytočného plastu.
-              </span>
-            </h1>
+        {/* stred – headline */}
+        <div className="container-tight flex flex-1 flex-col justify-center">
+          <h1 className="max-w-4xl font-display text-[13vw] font-bold leading-[0.92] text-white sm:text-7xl lg:text-8xl">
+            Vyčistíš celý dom.
+            <br />
+            <span className="text-white/95">Z jednej </span>
+            <span className="font-accent text-accent-glow">tablety.</span>
+          </h1>
 
-            <p className="mt-5 max-w-xl text-lg text-white/85">
-              Šumivú tabletu <strong className="text-white">Droply</strong> hodíš do vody a o dve minúty máš
-              plnohodnotný čistiaci prostriedok. Žiadne ťahanie litrov z obchodu.
-            </p>
+          <p className="mt-7 max-w-lg text-lg text-white/80">
+            Tabletu Droply hodíš do fľaše s vodou, o dve minúty máš plnohodnotný čistiaci prostriedok.
+            Žiadne ťahanie litrov z obchodu, žiadne hromady plastu.
+          </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href="#produkty"
-                className="btn-sheen inline-flex items-center gap-2 rounded-full bg-water-gradient px-7 py-4 text-base font-semibold text-white shadow-glow transition-transform hover:scale-[1.03]"
-              >
-                Vyskúšať Droply
-                <ArrowRight className="h-5 w-5" />
-              </a>
-              <div className="flex items-center gap-2">
-                <div className="flex">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-sunny text-sunny" />
-                  ))}
-                </div>
-                <span className="text-sm text-white/85">
-                  <strong className="text-white">4,9/5</strong> · 2 300+ recenzií
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/80">
-              <span className="inline-flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-eco" /> 30 dní na vrátenie
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Droplets className="h-4 w-4 text-accent" /> Vyrobené v EU
-              </span>
-            </div>
-
-            <div className="mt-10 inline-flex items-center gap-2 text-sm text-white/70">
-              <ChevronDown className="h-4 w-4 animate-bounce" />
-              Scrolluj a sleduj, ako sa tableta rozpúšťa vo vode
-            </div>
+          <div className="mt-9 flex flex-wrap items-center gap-4">
+            <a
+              href="#produkty"
+              className="btn-sheen group inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-base font-semibold text-secondary transition-transform hover:scale-[1.03]"
+            >
+              Objaviť produkty
+              <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+            <a
+              href="#ako"
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 px-7 py-4 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white/10"
+            >
+              Ako to funguje
+            </a>
           </div>
         </div>
 
-        {/* Kroky „Ako to funguje“ – objavia sa počas scrollovania (na pozadí videa) */}
-        <div
-          className="absolute inset-x-0 bottom-0 px-5 pb-10 text-white sm:px-10"
-          style={{ opacity: stepsOpacity, transition: "opacity 0.2s linear", pointerEvents: "none" }}
-        >
-          <div className="container-tight">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-accent">Ako to funguje</span>
-            <div className="mt-3 grid gap-3 sm:grid-cols-3">
-              {STEPS.map((step, i) => {
-                const active = i === activeStep;
-                const done = i < activeStep;
-                return (
-                  <div
-                    key={step.title}
-                    className={`rounded-2xl border p-4 backdrop-blur transition-all duration-300 ${
-                      active
-                        ? "border-accent/60 bg-white/15 shadow-glow"
-                        : "border-white/15 bg-white/5"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`grid h-7 w-7 shrink-0 place-items-center rounded-full text-sm font-bold ${
-                          active ? "bg-water-gradient text-white" : done ? "bg-eco text-white" : "bg-white/20 text-white/80"
-                        }`}
-                      >
-                        {done ? <Check className="h-4 w-4" /> : i + 1}
-                      </span>
-                      <h3 className="font-display text-base font-bold">{step.title}</h3>
-                    </div>
-                    <p className={`mt-2 text-sm ${active ? "text-white/90" : "text-white/60"}`}>{step.text}</p>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* progres rozpúšťania */}
-            <div className="mt-4 flex items-center gap-3">
-              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/20">
-                <div className="h-full rounded-full bg-water-gradient" style={{ width: `${progress * 100}%` }} />
-              </div>
-              <span className="w-12 text-right text-xs font-semibold tabular-nums text-white/80">
-                {Math.round(progress * 100)} %
+        {/* dolný pás – dôkazy */}
+        <div className="border-t border-white/10">
+          <div className="container-tight flex flex-wrap items-center gap-x-10 gap-y-3 py-5 text-sm text-white/75">
+            <span className="inline-flex items-center gap-2">
+              <span className="flex">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-accent text-accent" />
+                ))}
               </span>
-            </div>
+              <strong className="text-white">4,9/5</strong>
+            </span>
+            <span className="h-4 w-px bg-white/20" />
+            <span>10 000+ domácností</span>
+            <span className="h-4 w-px bg-white/20" />
+            <span>1 tableta = 1 fľaša čističa</span>
+            <span className="h-4 w-px bg-white/20" />
+            <span>Doprava zdarma nad 25 €</span>
           </div>
         </div>
       </div>

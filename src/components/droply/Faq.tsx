@@ -12,9 +12,9 @@ export default function Faq() {
     <section id="faq" className="relative py-20 sm:py-24">
       <div className="container-tight max-w-3xl">
         <Reveal className="text-center">
-          <span className="text-sm font-bold uppercase tracking-wider text-accent">Časté otázky</span>
-          <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
-            Ešte váhaš? <span className="text-gradient">Máme odpovede.</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Časté otázky</span>
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">
+            Ešte váhaš? <span className="font-accent text-primary">Máme odpovede.</span>
           </h2>
         </Reveal>
 

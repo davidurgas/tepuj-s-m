@@ -16,9 +16,9 @@ export default function Reviews() {
     <section id="recenzie" className="relative py-20 sm:py-28">
       <div className="container-tight">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-bold uppercase tracking-wider text-accent">Recenzie</span>
-          <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
-            Domácnosti, ktoré prešli na <span className="text-gradient">Droply</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Recenzie</span>
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">
+            Domácnosti, ktoré prešli na <span className="font-accent text-primary">Droply</span>
           </h2>
           <div className="mt-4 inline-flex items-center gap-3 rounded-full border border-border bg-card px-5 py-2.5 shadow-card">
             <div className="flex">

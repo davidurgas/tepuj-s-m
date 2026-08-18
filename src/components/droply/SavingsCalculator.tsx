@@ -48,9 +48,9 @@ export default function SavingsCalculator() {
       <div className="container-tight">
         <Reveal className="rounded-3xl border border-border bg-gradient-to-br from-primary/5 via-accent/5 to-eco/5 p-8 shadow-card sm:p-12">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-sm font-bold uppercase tracking-wider text-accent">Kalkulačka dopadu</span>
-            <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
-              Koľko ušetríš práve <span className="text-gradient">ty?</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Kalkulačka dopadu</span>
+            <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">
+              Koľko ušetríš práve <span className="font-accent text-primary">ty?</span>
             </h2>
             <p className="mt-3 text-muted-foreground">
               Potiahni posuvník podľa toho, koľko čističov tvoja domácnosť spotrebuje mesačne.

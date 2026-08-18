@@ -44,12 +44,14 @@ export default function Benefits() {
   return (
     <section id="vyhody" className="relative py-20 sm:py-28">
       <div className="container-tight">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-bold uppercase tracking-wider text-accent">Prečo Droply</span>
-          <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
-            Malá tableta. <span className="text-gradient">Veľký rozdiel.</span>
-          </h2>
-          <p className="mt-3 text-muted-foreground">
+        <Reveal className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <span className="kicker">03 — Prečo Droply</span>
+            <h2 className="mt-4 max-w-xl font-display text-3xl font-bold leading-tight sm:text-5xl">
+              Malá tableta, <span className="font-accent text-primary">veľký</span> rozdiel
+            </h2>
+          </div>
+          <p className="max-w-xs text-sm text-muted-foreground">
             Klasické čistiace prostriedky sú z ~95 % voda balená v plaste. Droply mení pravidlá hry.
           </p>
         </Reveal>

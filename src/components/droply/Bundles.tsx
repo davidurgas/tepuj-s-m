@@ -75,9 +75,9 @@ export default function Bundles() {
     <section id="cennik" className="relative overflow-hidden py-20 sm:py-28">
       <div className="container-tight">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-bold uppercase tracking-wider text-accent">Cenník</span>
-          <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
-            Vyber si balíček a <span className="text-gradient">začni šetriť</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">05 · Cenník</span>
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">
+            Vyber si balíček a <span className="font-accent text-primary">začni šetriť</span>
           </h2>
 
           {/* urgentnosť */}

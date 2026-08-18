@@ -23,16 +23,18 @@ export type Product = {
 };
 
 /** Reálne fotografie (Higgsfield CDN) — pre demo. V ostrej verzii nahradiť vlastnými. */
+const CDN = "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs";
 const IMG = {
-  universal: "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs/hf_20260818_143706_22b02a59-1cfc-4f21-aa0d-cecb079a7a77.png",
-  kitchen: "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs/hf_20260818_143706_cf1312c7-3596-46f5-b46b-818697cb959d.png",
-  glass: "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs/hf_20260818_143706_fb8b2be0-31c1-4aa2-942f-5750f29efc08.png",
-  bathroom: "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs/hf_20260818_143706_17bfd58a-4100-4645-ade9-3a197cb7680b.png",
+  universal: `${CDN}/hf_20260818_160205_83d992e0-bb23-4d57-8f4e-903f5efc0a0a.png`,
+  kitchen: `${CDN}/hf_20260818_160205_4f8b438c-15dd-4e45-ac12-ae8d30d24aee.png`,
+  glass: `${CDN}/hf_20260818_160206_b18f01e1-f024-4468-82c5-fd6ccd9f1849.png`,
+  bathroom: `${CDN}/hf_20260818_160205_dd7bdbc6-250a-45ab-b153-c01d3ba7ad40.png`,
+  floor: `${CDN}/hf_20260818_160206_4a8c5061-2834-46fe-be0d-0d8949234143.png`,
+  laundry: `${CDN}/hf_20260818_160205_52111eb2-a24d-430c-aaa1-6d72f40e9c54.png`,
 };
 
-/** Reálne video makro-rozpúšťania tablety vo vode (Higgsfield CDN) — pozadie hero. */
-export const DISSOLVE_VIDEO =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs/hf_20260818_143642_a867c5f7-434f-4cbe-b730-b5242c685121.mp4";
+/** Reálne makro-video rozpúšťania tablety v čistiacej fľaši (Higgsfield CDN) — pozadie hero. */
+export const DISSOLVE_VIDEO = `${CDN}/hf_20260818_160039_316f6083-5036-4f14-ae27-df8f17bd4a85.mp4`;
 
 export const products: Product[] = [
   {
@@ -96,6 +98,35 @@ export const products: Product[] = [
     reviews: 634,
     stock: 12,
     badge: "Posledné kusy",
+  },
+  {
+    id: "floor",
+    name: "Podlahy",
+    tagline: "Rýchloschnúca formula pre laminát, dlažbu aj drevo",
+    theme: "floor",
+    image: IMG.floor,
+    price: 4.9,
+    compareAt: 7.9,
+    replacesBottles: 6,
+    scent: "Eukalyptus",
+    rating: 4.7,
+    reviews: 389,
+    stock: 44,
+  },
+  {
+    id: "laundry",
+    name: "Prací gél",
+    tagline: "Koncentrované tablety – rozpustia sa priamo v bubne",
+    theme: "laundry",
+    image: IMG.laundry,
+    price: 5.9,
+    compareAt: 9.9,
+    replacesBottles: 4,
+    scent: "Levanduľa",
+    rating: 4.9,
+    reviews: 726,
+    stock: 29,
+    badge: "Novinka",
   },
 ];
 

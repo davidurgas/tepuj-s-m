@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,9 +7,9 @@
 @layer base {
   :root {
     /* ============ DROPLY BRAND ============ */
-    /* Cool near-white background with a hint of water */
-    --background: 200 50% 99%;
-    --foreground: 213 45% 13%;
+    /* Clean paper background, near-black ink for editorial contrast */
+    --background: 200 33% 98%;
+    --foreground: 214 60% 9%;
 
     /* Droply Blue — primary */
     --primary: 205 90% 44%;
@@ -101,13 +101,21 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Sora', 'Inter', sans-serif;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
     @apply font-bold tracking-tight;
   }
 
   ::selection {
     background: hsl(187 92% 46% / 0.28);
   }
+}
+
+/* Editorial accent – kurzíva pätkového písma pre jedno-dve slová */
+.font-accent {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 @layer components {
@@ -147,9 +155,29 @@
   /* Reveal-on-scroll base state (paired with .is-visible) */
   .reveal {
     opacity: 0;
-    transform: translateY(34px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(22px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
+  }
+
+  /* Editorial kicker – malý mono label so sekciovým číslom */
+  .kicker {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .kicker::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: hsl(var(--primary));
+    display: inline-block;
   }
   .reveal.is-visible {
     opacity: 1;

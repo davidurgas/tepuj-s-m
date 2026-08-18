@@ -15,7 +15,7 @@ export default function Newsletter() {
       return;
     }
     setDone(true);
-    toast.success("Hotovo! Tvoj zľavový kód je DROPLY10 🎉");
+    toast.success("Hotovo! Tvoj zľavový kód je DROPLY10");
   };
 
   return (

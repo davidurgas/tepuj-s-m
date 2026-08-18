@@ -4,6 +4,7 @@ import Logo from "./Logo";
 import { useCart } from "./cart-context";
 
 const LINKS = [
+  { href: "#ako", label: "Ako to funguje" },
   { href: "#vyhody", label: "Výhody" },
   { href: "#produkty", label: "Produkty" },
   { href: "#cennik", label: "Cenník" },

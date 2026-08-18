@@ -15,9 +15,9 @@ export default function Comparison() {
     <section className="relative py-20 sm:py-24">
       <div className="container-tight">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-bold uppercase tracking-wider text-accent">Porovnanie</span>
-          <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
-            Klasické fľaše vs. <span className="text-gradient">Droply</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Porovnanie</span>
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">
+            Klasické fľaše <span className="font-accent text-primary">vs.</span> Droply
           </h2>
         </Reveal>
 

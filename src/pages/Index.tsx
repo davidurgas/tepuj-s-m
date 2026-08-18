@@ -2,6 +2,7 @@ import { CartProvider } from "@/components/droply/cart-context";
 import Navbar from "@/components/droply/Navbar";
 import HeroDissolve from "@/components/droply/HeroDissolve";
 import TrustBar from "@/components/droply/TrustBar";
+import AkoFunguje from "@/components/droply/AkoFunguje";
 import Benefits from "@/components/droply/Benefits";
 import SavingsCalculator from "@/components/droply/SavingsCalculator";
 import Comparison from "@/components/droply/Comparison";
@@ -23,6 +24,7 @@ const Index = () => {
         <main>
           <HeroDissolve />
           <TrustBar />
+          <AkoFunguje />
           <Benefits />
           <SavingsCalculator />
           <Comparison />

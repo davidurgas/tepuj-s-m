@@ -24,9 +24,7 @@ export default function EcoImpact() {
 
       <div className="container-tight relative">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
-            🌍 Náš spoločný dopad
-          </span>
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-glow">Náš spoločný dopad</span>
           <h2 className="mt-4 font-display text-3xl font-extrabold sm:text-4xl">
             Malé tablety, ktoré menia veľké čísla
           </h2>
