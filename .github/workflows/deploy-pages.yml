@@ -1,9 +1,8 @@
 name: Deploy Droply demo to GitHub Pages
 
+# Spúšťa sa iba manuálne (Actions → Deploy Droply demo → Run workflow).
+# Najprv v Settings → Pages nastavte Source: "GitHub Actions".
 on:
-  push:
-    branches:
-      - claude/droply-cleaning-tablets-eshop-cd0mxu
   workflow_dispatch:
 
 permissions:

@@ -43,3 +43,40 @@ bun run preview  # náhľad buildu
 
 Hlavná stránka: `src/pages/Index.tsx`. Sekcie eshopu: `src/components/droply/`.
 Obsah (produkty, balíčky, recenzie, FAQ): `src/lib/droply-data.ts`.
+
+## 📱 Náhľad na mobile (cez Wi-Fi)
+
+1. Na počítači (potrebuješ nainštalované **Node.js 18+** a **Git**) stiahni projekt:
+
+   ```bash
+   git clone -b claude/droply-cleaning-tablets-eshop-cd0mxu https://github.com/davidurgas/tepuj-s-m.git
+   cd tepuj-s-m
+   npm install
+   npm run dev -- --host
+   ```
+
+2. Vite vypíše dve adresy, napr.:
+
+   ```
+   ➜  Local:   http://localhost:8080/
+   ➜  Network: http://192.168.0.15:8080/     <-- túto otvor v mobile
+   ```
+
+3. Na telefóne (pripojenom na **rovnakú Wi-Fi**) otvor tú **Network** adresu.
+
+> Poznámky: počítač aj telefón musia byť na tej istej sieti. Pri prvom spustení
+> môže Windows/macOS firewall vyžiadať povolenie pre Node.js — povoľ ho.
+> Reálne fotky a video sa načítavajú z internetu, takže telefón musí byť online.
+
+## Poznámka k médiám
+
+Fotografie produktov a video rozpúšťania sú pre demo generované (AI) a načítavajú
+sa z externého CDN — odkazy sú v `src/lib/droply-data.ts`. V ostrej verzii ich
+nahraď vlastnými fotkami/videom (ideálne uloženými v `public/`).
+
+## Nasadenie online (voliteľné)
+
+Repozitár obsahuje workflow `.github/workflows/deploy-pages.yml` pre GitHub Pages.
+Spustí sa iba manuálne. Najprv v **Settings → Pages** nastav *Source: „GitHub
+Actions"* (súkromný repo vyžaduje GitHub Pro), potom **Actions → Deploy Droply
+demo → Run workflow**. Web bude na `https://davidurgas.github.io/tepuj-s-m/`.
