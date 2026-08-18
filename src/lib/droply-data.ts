@@ -4,6 +4,10 @@ export type Product = {
   tagline: string;
   /** kľúč ikony/farby v UI */
   theme: "kitchen" | "glass" | "bathroom" | "floor" | "universal" | "laundry";
+  /** reálna fotografia produktu */
+  image: string;
+  /** poloha orezania fotky v štvorcovej karte */
+  imagePosition?: string;
   price: number;
   /** pôvodná (prečiarknutá) cena — kotvenie / anchoring */
   compareAt: number;
@@ -18,12 +22,26 @@ export type Product = {
   bestseller?: boolean;
 };
 
+/** Reálne fotografie (Higgsfield CDN) — pre demo. V ostrej verzii nahradiť vlastnými. */
+const IMG = {
+  universal: "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs/hf_20260818_143706_22b02a59-1cfc-4f21-aa0d-cecb079a7a77.png",
+  kitchen: "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs/hf_20260818_143706_cf1312c7-3596-46f5-b46b-818697cb959d.png",
+  glass: "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs/hf_20260818_143706_fb8b2be0-31c1-4aa2-942f-5750f29efc08.png",
+  bathroom: "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs/hf_20260818_143706_17bfd58a-4100-4645-ade9-3a197cb7680b.png",
+};
+
+/** Reálne video makro-rozpúšťania tablety vo vode (Higgsfield CDN) — pozadie hero. */
+export const DISSOLVE_VIDEO =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_3AhuqzP4VjgsdpfdOEJfJ1mDnzs/hf_20260818_143642_a867c5f7-434f-4cbe-b730-b5242c685121.mp4";
+
 export const products: Product[] = [
   {
     id: "universal",
     name: "Univerzál",
     tagline: "Jedna tableta na (takmer) všetko v domácnosti",
     theme: "universal",
+    image: IMG.universal,
+    imagePosition: "center",
     price: 4.9,
     compareAt: 7.9,
     replacesBottles: 5,
@@ -39,6 +57,7 @@ export const products: Product[] = [
     name: "Kuchyňa",
     tagline: "Odmasťovač, ktorý si poradí aj s pripáleným tukom",
     theme: "kitchen",
+    image: IMG.kitchen,
     price: 4.9,
     compareAt: 7.9,
     replacesBottles: 5,
@@ -53,6 +72,7 @@ export const products: Product[] = [
     name: "Okná & Sklo",
     tagline: "Bez šmúh a bez rozprašovania litrov chémie",
     theme: "glass",
+    image: IMG.glass,
     price: 4.5,
     compareAt: 6.9,
     replacesBottles: 6,
@@ -67,6 +87,7 @@ export const products: Product[] = [
     name: "Kúpeľňa",
     tagline: "Vodný kameň a mydlové usadeniny nemajú šancu",
     theme: "bathroom",
+    image: IMG.bathroom,
     price: 4.9,
     compareAt: 7.9,
     replacesBottles: 5,
@@ -75,33 +96,6 @@ export const products: Product[] = [
     reviews: 634,
     stock: 12,
     badge: "Posledné kusy",
-  },
-  {
-    id: "floor",
-    name: "Podlahy",
-    tagline: "Rýchloschnúca formula pre laminát, dlažbu aj drevo",
-    theme: "floor",
-    price: 4.9,
-    compareAt: 7.9,
-    replacesBottles: 6,
-    scent: "Eukalyptus",
-    rating: 4.7,
-    reviews: 389,
-    stock: 44,
-  },
-  {
-    id: "laundry",
-    name: "Prací gél",
-    tagline: "Koncentrované tablety – rozpustia sa priamo v bubne",
-    theme: "laundry",
-    price: 5.9,
-    compareAt: 9.9,
-    replacesBottles: 4,
-    scent: "Levanduľa",
-    rating: 4.9,
-    reviews: 726,
-    stock: 29,
-    badge: "Novinka",
   },
 ];
 

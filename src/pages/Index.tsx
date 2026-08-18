@@ -1,8 +1,7 @@
 import { CartProvider } from "@/components/droply/cart-context";
 import Navbar from "@/components/droply/Navbar";
-import Hero from "@/components/droply/Hero";
+import HeroDissolve from "@/components/droply/HeroDissolve";
 import TrustBar from "@/components/droply/TrustBar";
-import DissolveScroll from "@/components/droply/DissolveScroll";
 import Benefits from "@/components/droply/Benefits";
 import SavingsCalculator from "@/components/droply/SavingsCalculator";
 import Comparison from "@/components/droply/Comparison";
@@ -22,10 +21,9 @@ const Index = () => {
       <div className="min-h-screen bg-background">
         <Navbar />
         <main>
-          <Hero />
+          <HeroDissolve />
           <TrustBar />
           <Benefits />
-          <DissolveScroll />
           <SavingsCalculator />
           <Comparison />
           <Products />

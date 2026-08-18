@@ -14,7 +14,7 @@ const COLS = [
   {
     title: "Droply",
     links: [
-      { label: "Ako to funguje", href: "#ako-funguje" },
+      { label: "Ako to funguje", href: "#top" },
       { label: "Výhody", href: "#vyhody" },
       { label: "Recenzie", href: "#recenzie" },
       { label: "Časté otázky", href: "#faq" },

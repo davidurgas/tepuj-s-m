@@ -5,7 +5,6 @@ import { useCart } from "./cart-context";
 
 const LINKS = [
   { href: "#vyhody", label: "Výhody" },
-  { href: "#ako-funguje", label: "Ako to funguje" },
   { href: "#produkty", label: "Produkty" },
   { href: "#cennik", label: "Cenník" },
   { href: "#recenzie", label: "Recenzie" },

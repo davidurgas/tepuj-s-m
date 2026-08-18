@@ -12,16 +12,15 @@ import {
 } from "lucide-react";
 import { products, type Product } from "@/lib/droply-data";
 import { useCart } from "./cart-context";
-import { DroplyMark } from "./Logo";
 import Reveal from "./Reveal";
 
-const THEME: Record<Product["theme"], { icon: typeof Sparkles; from: string; to: string }> = {
-  universal: { icon: Sparkles, from: "from-sky-400", to: "to-blue-600" },
-  kitchen: { icon: UtensilsCrossed, from: "from-lime-400", to: "to-emerald-600" },
-  glass: { icon: PanelTop, from: "from-cyan-300", to: "to-sky-500" },
-  bathroom: { icon: ShowerHead, from: "from-teal-400", to: "to-cyan-600" },
-  floor: { icon: Footprints, from: "from-emerald-400", to: "to-teal-600" },
-  laundry: { icon: Shirt, from: "from-violet-400", to: "to-indigo-600" },
+const THEME: Record<Product["theme"], { icon: typeof Sparkles }> = {
+  universal: { icon: Sparkles },
+  kitchen: { icon: UtensilsCrossed },
+  glass: { icon: PanelTop },
+  bathroom: { icon: ShowerHead },
+  floor: { icon: Footprints },
+  laundry: { icon: Shirt },
 };
 
 function discountPct(p: Product) {
@@ -37,13 +36,19 @@ function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-hover">
-      {/* vizuál */}
-      <div className={`relative flex h-40 items-center justify-center bg-gradient-to-br ${theme.from} ${theme.to}`}>
-        <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(circle at 30% 20%, #fff, transparent 60%)" }} />
-        <div className="relative flex flex-col items-center">
-          <DroplyMark size={54} className="drop-shadow-lg transition-transform duration-500 group-hover:scale-110" />
-          <Icon className="mt-2 h-6 w-6 text-white/90" />
-        </div>
+      {/* vizuál – reálna fotografia */}
+      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+        <img
+          src={product.image}
+          alt={`Droply ${product.name} – šumivé čistiace tablety`}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          style={{ objectPosition: product.imagePosition ?? "center" }}
+        />
+        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/85 px-2.5 py-1 text-xs font-semibold text-primary backdrop-blur">
+          <Icon className="h-3.5 w-3.5" />
+          {product.name}
+        </span>
         {product.badge && (
           <span
             className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-bold shadow ${
