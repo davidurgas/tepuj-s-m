@@ -1,11 +1,11 @@
+import { useState } from "react";
 import { Check, Crown, Zap } from "lucide-react";
 import { bundles, type Bundle } from "@/lib/droply-data";
-import { useCart } from "./cart-context";
 import Countdown from "./Countdown";
 import Reveal from "./Reveal";
+import BundleBuilder from "./BundleBuilder";
 
-function BundleCard({ bundle }: { bundle: Bundle }) {
-  const { add } = useCart();
+function BundleCard({ bundle, onSelect }: { bundle: Bundle; onSelect: () => void }) {
   const highlight = bundle.highlight;
 
   return (
@@ -57,20 +57,21 @@ function BundleCard({ bundle }: { bundle: Bundle }) {
       </ul>
 
       <button
-        onClick={() => add({ id: `bundle-${bundle.id}`, name: `Balíček ${bundle.name}`, price: bundle.price, meta: `${bundle.tablets} tabliet` })}
+        onClick={onSelect}
         className={`btn-sheen mt-7 w-full rounded-full px-6 py-3.5 text-sm font-semibold transition-transform hover:scale-[1.03] ${
           highlight
             ? "bg-water-gradient text-white shadow-glow"
             : "border border-primary/20 bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground"
         }`}
       >
-        Vybrať balíček
+        Vyskladať balíček
       </button>
     </div>
   );
 }
 
 export default function Bundles() {
+  const [openBundle, setOpenBundle] = useState<Bundle | null>(null);
   return (
     <section id="cennik" className="relative overflow-hidden py-20 sm:py-28">
       <div className="container-tight">
@@ -92,15 +93,17 @@ export default function Bundles() {
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {bundles.map((b, i) => (
             <Reveal key={b.id} delay={i * 90}>
-              <BundleCard bundle={b} />
+              <BundleCard bundle={b} onSelect={() => setOpenBundle(b)} />
             </Reveal>
           ))}
         </div>
 
         <p className="mt-8 text-center text-sm text-muted-foreground">
-          Každý balíček obsahuje dávkovaciu fľašu s doživotnou zárukou. Tablety si vyberieš pri objednávke.
+          Klikni na balíček a naklikaj si, koľko ktorých tabliet chceš. Dávkovacia fľaša je v cene.
         </p>
       </div>
+
+      {openBundle && <BundleBuilder bundle={openBundle} onClose={() => setOpenBundle(null)} />}
     </section>
   );
 }

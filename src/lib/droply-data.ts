@@ -33,11 +33,11 @@ const IMG = {
   laundry: `${CDN}/hf_20260818_160205_52111eb2-a24d-430c-aaa1-6d72f40e9c54.png`,
 };
 
-/** Hero video – pokojné 10s makro rozpúšťania v čistiacej fľaši (Higgsfield CDN). */
-export const DISSOLVE_VIDEO = `${CDN}/hf_20260819_075136_aaf23045-14d6-428b-8d98-a029ccc47e59.mp4`;
+/** Hero video – plastová čistiaca fľaša s logom, tableta sa reálne rozpúšťa (Higgsfield CDN). */
+export const DISSOLVE_VIDEO = `${CDN}/hf_20260819_094052_944de1ff-a1d6-49a6-a2fa-3b822796934b.mp4`;
 
-/** Video na bielom pozadí – pre sekciu „Ako funguje" (splýva s bielym pozadím). */
-export const DISSOLVE_VIDEO_WHITE = `${CDN}/hf_20260819_075145_1a4466ad-4be7-49c2-a2c1-79bed8fe6c3e.mp4`;
+/** Video na bielom pozadí – pre sekciu „Ako funguje" (plastová fľaša, splýva s bielym pozadím). */
+export const DISSOLVE_VIDEO_WHITE = `${CDN}/hf_20260819_094102_2c1f18a2-5d9a-41f6-9e1d-40404f8bc976.mp4`;
 
 /** Široká hero fotka (rozprašovacia fľaša + tablety). */
 export const HERO_IMAGE = `${CDN}/hf_20260818_160205_4fea7fac-bc32-4ae7-a3f0-97435a2b522d.png`;

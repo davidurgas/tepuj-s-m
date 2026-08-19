@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ShoppingBag, Menu, X, Truck, Leaf } from "lucide-react";
+import { ShoppingBag, Menu, X, Truck, Droplet } from "lucide-react";
 import Logo from "./Logo";
 import { useCart } from "./cart-context";
 
@@ -94,7 +94,7 @@ export default function Navbar() {
                     onClick={() => setMobileOpen(false)}
                     className="flex items-center gap-2 py-3 text-sm font-medium text-foreground"
                   >
-                    <Leaf className="h-4 w-4 text-eco" />
+                    <Droplet className="h-4 w-4 fill-primary/20 text-primary" />
                     {l.label}
                   </a>
                 </li>
