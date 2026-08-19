@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { Droplets, Sparkles, Wand2, Play } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Droplets, Sparkles, Wand2 } from "lucide-react";
 import { DISSOLVE_VIDEO, HERO_IMAGE } from "@/lib/droply-data";
 import Reveal from "./Reveal";
 
@@ -21,43 +21,34 @@ const STEPS = [
   },
 ];
 
+/** Video rozpúšťania – autoplay, votkané do pozadia mäkkými okrajmi (bez rámika). */
 function VideoShowcase() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [playing, setPlaying] = useState(false);
 
-  const play = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.play().then(() => setPlaying(true)).catch(() => {});
-  };
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
+  // mäkké okraje – video splýva s pozadím, nevidno ohraničenie
+  const feather = "radial-gradient(115% 115% at 50% 45%, #000 55%, transparent 100%)";
 
   return (
-    <div className="group relative overflow-hidden rounded-3xl border border-border bg-secondary shadow-hover">
+    <div className="relative">
+      <div className="pointer-events-none absolute inset-6 rounded-full bg-water-gradient opacity-25 blur-3xl" />
       <video
         ref={videoRef}
-        className="aspect-[4/5] w-full object-cover sm:aspect-square"
+        className="relative mx-auto aspect-square w-full max-w-lg object-cover"
+        style={{ maskImage: feather, WebkitMaskImage: feather }}
         src={DISSOLVE_VIDEO}
         poster={HERO_IMAGE}
-        playsInline
-        loop
+        autoPlay
         muted
-        controls={playing}
-        preload="metadata"
+        loop
+        playsInline
+        preload="auto"
+        // @ts-expect-error iOS atribút
+        webkit-playsinline="true"
       />
-      {!playing && (
-        <button
-          onClick={play}
-          className="absolute inset-0 flex items-center justify-center bg-secondary/25 transition-colors hover:bg-secondary/10"
-          aria-label="Prehrať video"
-        >
-          <span className="grid h-20 w-20 place-items-center rounded-full bg-white/90 text-primary shadow-hover transition-transform group-hover:scale-110">
-            <Play className="ml-1 h-8 w-8 fill-primary" />
-          </span>
-          <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-secondary">
-            Pozri, ako sa tableta rozpúšťa
-          </span>
-        </button>
-      )}
     </div>
   );
 }
