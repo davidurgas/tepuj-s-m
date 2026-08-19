@@ -38,12 +38,12 @@ export default function Navbar() {
 
       <header
         className={`sticky top-0 z-50 transition-all duration-300 ${
-          scrolled ? "glass shadow-card" : "bg-transparent"
+          scrolled ? "glass shadow-card" : "bg-background/80 backdrop-blur-md"
         }`}
       >
         <nav className="container-tight flex items-center justify-between py-3">
           <a href="#top" className="flex items-center" aria-label="Droply domov">
-            <Logo size={38} light={!scrolled} />
+            <Logo size={38} />
           </a>
 
           <ul className="hidden items-center gap-7 md:flex">
@@ -51,9 +51,7 @@ export default function Navbar() {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className={`text-sm font-medium transition-colors hover:text-accent ${
-                    scrolled ? "text-muted-foreground" : "text-white/85"
-                  }`}
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
                 >
                   {l.label}
                 </a>
@@ -76,9 +74,7 @@ export default function Navbar() {
             </button>
 
             <button
-              className={`grid h-10 w-10 place-items-center rounded-full md:hidden ${
-                scrolled || mobileOpen ? "text-foreground" : "text-white"
-              }`}
+              className="grid h-10 w-10 place-items-center rounded-full text-foreground md:hidden"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Menu"
             >

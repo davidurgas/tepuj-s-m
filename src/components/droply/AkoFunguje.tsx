@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Droplets, Sparkles, Wand2 } from "lucide-react";
-import { DISSOLVE_VIDEO, HERO_IMAGE } from "@/lib/droply-data";
+import { DISSOLVE_VIDEO_WHITE } from "@/lib/droply-data";
 import Reveal from "./Reveal";
 
 const STEPS = [
@@ -29,18 +29,16 @@ function VideoShowcase() {
     videoRef.current?.play().catch(() => {});
   }, []);
 
-  // mäkké okraje – video splýva s pozadím, nevidno ohraničenie
-  const feather = "radial-gradient(115% 115% at 50% 45%, #000 55%, transparent 100%)";
+  // mäkké okraje – biele video splýva s bielym pozadím, nevidno ohraničenie
+  const feather = "radial-gradient(120% 120% at 50% 50%, #000 68%, transparent 100%)";
 
   return (
     <div className="relative">
-      <div className="pointer-events-none absolute inset-6 rounded-full bg-water-gradient opacity-25 blur-3xl" />
       <video
         ref={videoRef}
         className="relative mx-auto aspect-square w-full max-w-lg object-cover"
         style={{ maskImage: feather, WebkitMaskImage: feather }}
-        src={DISSOLVE_VIDEO}
-        poster={HERO_IMAGE}
+        src={DISSOLVE_VIDEO_WHITE}
         autoPlay
         muted
         loop

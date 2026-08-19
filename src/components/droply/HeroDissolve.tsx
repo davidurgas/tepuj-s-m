@@ -12,7 +12,8 @@ export default function HeroDissolve() {
   const [y, setY] = useState(0);
 
   useEffect(() => {
-    // pokus o spustenie (niektoré prehliadače vyžadujú explicitné play po mount)
+    // pokus o spustenie + spomalenie pre pokojnejšiu slučku
+    if (videoRef.current) videoRef.current.playbackRate = 0.7;
     videoRef.current?.play().catch(() => {});
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let ticking = false;
