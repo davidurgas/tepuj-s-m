@@ -134,7 +134,7 @@ export default function Products() {
       <div className="container-tight">
         <Reveal className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <span className="kicker">04 — Sortiment</span>
+            <span className="kicker">Sortiment</span>
             <h2 className="mt-4 max-w-xl font-display text-3xl font-bold leading-tight sm:text-5xl">
               Jedna tableta pre každú <span className="font-accent text-primary">miestnosť</span>
             </h2>

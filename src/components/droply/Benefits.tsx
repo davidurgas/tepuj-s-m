@@ -46,7 +46,7 @@ export default function Benefits() {
       <div className="container-tight">
         <Reveal className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <span className="kicker">03 — Prečo Droply</span>
+            <span className="kicker">Prečo Droply</span>
             <h2 className="mt-4 max-w-xl font-display text-3xl font-bold leading-tight sm:text-5xl">
               Malá tableta, <span className="font-accent text-primary">veľký</span> rozdiel
             </h2>
