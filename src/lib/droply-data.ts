@@ -42,6 +42,10 @@ export const DISSOLVE_VIDEO_WHITE = `${CDN}/hf_20260820_070820_cd0ed9cc-a420-452
 /** Široká hero fotka (rozprašovacia fľaša + tablety). */
 export const HERO_IMAGE = `${CDN}/hf_20260818_160205_4fea7fac-bc32-4ae7-a3f0-97435a2b522d.png`;
 
+/** Fotka zákazníckej podpory + meno. */
+export const SUPPORT_IMAGE = `${CDN}/hf_20260820_084036_d9d27321-67f7-482b-9edd-920e57efc9ce.png`;
+export const SUPPORT_NAME = "Klára";
+
 /** Reklamné bannery pre hero slider (16:9, produkt vpravo, miesto na text vľavo). */
 export const BANNER_SALE = `${CDN}/hf_20260819_154949_f35dade2-7d66-435e-afa4-6c6bd15d9953.png`;
 export const BANNER_BEST = `${CDN}/hf_20260819_155148_2b1f96c0-f338-43b0-af6e-c423c587cfb5.png`;

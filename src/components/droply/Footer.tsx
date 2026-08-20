@@ -1,32 +1,33 @@
 import { Instagram, Facebook, Mail, Leaf } from "lucide-react";
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 const COLS = [
   {
-    title: "Produkty",
+    title: "Nákup",
     links: [
-      { label: "Univerzál", href: "#produkty" },
-      { label: "Kuchyňa", href: "#produkty" },
-      { label: "Kúpeľňa", href: "#produkty" },
-      { label: "Balíčky", href: "#cennik" },
+      { label: "Produkty", to: "/" },
+      { label: "Balíčky / cenník", to: "/cennik" },
+      { label: "Ako to funguje", to: "/ako-funguje" },
+      { label: "Recenzie", to: "/recenzie" },
     ],
   },
   {
     title: "Droply",
     links: [
-      { label: "Ako to funguje", href: "#top" },
-      { label: "Výhody", href: "#vyhody" },
-      { label: "Recenzie", href: "#recenzie" },
-      { label: "Časté otázky", href: "#faq" },
+      { label: "Prečo Droply", to: "/" },
+      { label: "Kalkulačka úspor", to: "/ako-funguje" },
+      { label: "Časté otázky", to: "/cennik" },
+      { label: "Môj účet", to: "/" },
     ],
   },
   {
     title: "Podpora",
     links: [
-      { label: "Doprava a platba", href: "#" },
-      { label: "Vrátenie tovaru", href: "#" },
-      { label: "Obchodné podmienky", href: "#" },
-      { label: "Ochrana súkromia", href: "#" },
+      { label: "Doprava a platba", to: "/cennik" },
+      { label: "Vrátenie tovaru", to: "/cennik" },
+      { label: "Obchodné podmienky", to: "#" },
+      { label: "Ochrana súkromia", to: "#" },
     ],
   },
 ];
@@ -61,9 +62,15 @@ export default function Footer() {
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <a href={l.href} className="text-sm text-white/60 transition-colors hover:text-accent">
-                      {l.label}
-                    </a>
+                    {l.to.startsWith("/") ? (
+                      <Link to={l.to} className="text-sm text-white/60 transition-colors hover:text-accent">
+                        {l.label}
+                      </Link>
+                    ) : (
+                      <a href={l.to} className="text-sm text-white/60 transition-colors hover:text-accent">
+                        {l.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

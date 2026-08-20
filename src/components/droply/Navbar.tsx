@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { ShoppingBag, Menu, X, Truck, Droplet, User } from "lucide-react";
 import Logo from "./Logo";
 import { useCart } from "./cart-context";
 import { useAccount } from "./account-context";
 
 const LINKS = [
-  { href: "#ako", label: "Ako to funguje" },
-  { href: "#vyhody", label: "Výhody" },
-  { href: "#produkty", label: "Produkty" },
-  { href: "#cennik", label: "Cenník" },
-  { href: "#recenzie", label: "Recenzie" },
+  { to: "/", label: "Domov" },
+  { to: "/ako-funguje", label: "Ako to funguje" },
+  { to: "/cennik", label: "Cenník" },
+  { to: "/recenzie", label: "Recenzie" },
 ];
 
 export default function Navbar() {
@@ -17,6 +17,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { count, openCart } = useCart();
   const { user, openAccount } = useAccount();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -44,19 +45,21 @@ export default function Navbar() {
         }`}
       >
         <nav className="container-tight flex items-center justify-between py-3">
-          <a href="#top" className="flex items-center" aria-label="Droply domov">
+          <Link to="/" className="flex items-center" aria-label="Droply domov">
             <Logo size={38} />
-          </a>
+          </Link>
 
           <ul className="hidden items-center gap-7 md:flex">
             {LINKS.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              <li key={l.to}>
+                <Link
+                  to={l.to}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    pathname === l.to ? "text-primary" : "text-muted-foreground"
+                  }`}
                 >
                   {l.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -99,15 +102,15 @@ export default function Navbar() {
           <div className="glass border-t border-border md:hidden">
             <ul className="container-tight flex flex-col py-2">
               {LINKS.map((l) => (
-                <li key={l.href}>
-                  <a
-                    href={l.href}
+                <li key={l.to}>
+                  <Link
+                    to={l.to}
                     onClick={() => setMobileOpen(false)}
                     className="flex items-center gap-2 py-3 text-sm font-medium text-foreground"
                   >
                     <Droplet className="h-4 w-4 fill-primary/20 text-primary" />
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
