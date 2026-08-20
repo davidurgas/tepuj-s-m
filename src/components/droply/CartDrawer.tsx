@@ -1,15 +1,27 @@
-import { X, Plus, Minus, Trash2, ShoppingBag, Truck, Check, Lock } from "lucide-react";
+import { useState } from "react";
+import { X, Plus, Minus, Trash2, ShoppingBag, Truck, Check, Lock, Tag, ShieldCheck, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { useCart, FREE_SHIPPING_THRESHOLD } from "./cart-context";
 
 export default function CartDrawer() {
-  const { items, isOpen, closeCart, setQty, remove, total, count, clear } = useCart();
+  const { items, isOpen, closeCart, setQty, remove, total, count, clear, shipping, discount, discountCode, grandTotal, applyCode, removeCode } =
+    useCart();
+  const [code, setCode] = useState("");
 
   const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - total);
   const shippingPct = Math.min(100, (total / FREE_SHIPPING_THRESHOLD) * 100);
 
+  const submitCode = (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = applyCode(code);
+    res.ok ? toast.success(res.message) : toast.error(res.message);
+    if (res.ok) setCode("");
+  };
+
+  const eur = (n: number) => `${n.toLocaleString("sk-SK", { minimumFractionDigits: 2 })} €`;
+
   const checkout = () => {
-    toast.success("Toto je demo 🙂 Platobná brána zatiaľ nie je aktívna.", {
+    toast.success("Toto je demo — platobná brána zatiaľ nie je aktívna.", {
       description: "V ostrej verzii by teraz nasledovala pokladňa a platba.",
     });
     clear();
@@ -121,12 +133,52 @@ export default function CartDrawer() {
 
             {/* footer */}
             <footer className="border-t border-border p-5">
-              <div className="mb-3 flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Medzisúčet</span>
-                <span className="font-display text-xl font-extrabold">
-                  {total.toLocaleString("sk-SK", { minimumFractionDigits: 2 })} €
-                </span>
+              {/* zľavový kód */}
+              {discountCode ? (
+                <div className="mb-3 flex items-center justify-between rounded-xl bg-eco/10 px-3 py-2 text-sm">
+                  <span className="inline-flex items-center gap-1.5 font-medium text-eco">
+                    <Tag className="h-4 w-4" /> Kód {discountCode} aktívny
+                  </span>
+                  <button onClick={removeCode} className="text-xs text-muted-foreground underline hover:text-destructive">
+                    odstrániť
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={submitCode} className="mb-3 flex gap-2">
+                  <input
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                    placeholder="Zľavový kód (napr. DROPLY10)"
+                    className="min-w-0 flex-1 rounded-xl border border-border bg-muted/40 px-3 py-2.5 text-sm outline-none focus:border-primary"
+                  />
+                  <button type="submit" className="rounded-xl bg-secondary px-4 py-2.5 text-sm font-semibold text-secondary-foreground">
+                    Použiť
+                  </button>
+                </form>
+              )}
+
+              {/* súhrn objednávky */}
+              <div className="mb-4 space-y-1.5 text-sm">
+                <div className="flex justify-between text-muted-foreground">
+                  <span>Medzisúčet</span>
+                  <span className="tabular-nums text-foreground">{eur(total)}</span>
+                </div>
+                {discount > 0 && (
+                  <div className="flex justify-between text-eco">
+                    <span>Zľava</span>
+                    <span className="tabular-nums">−{eur(discount)}</span>
+                  </div>
+                )}
+                <div className="flex justify-between text-muted-foreground">
+                  <span>Doprava</span>
+                  <span className="tabular-nums">{shipping === 0 ? <span className="text-eco">Zdarma</span> : eur(shipping)}</span>
+                </div>
+                <div className="mt-2 flex items-center justify-between border-t border-border pt-2.5">
+                  <span className="font-semibold">Spolu</span>
+                  <span className="font-display text-xl font-extrabold tabular-nums">{eur(grandTotal)}</span>
+                </div>
               </div>
+
               <button
                 onClick={checkout}
                 className="btn-sheen flex w-full items-center justify-center gap-2 rounded-full bg-water-gradient py-3.5 font-semibold text-white shadow-glow transition-transform hover:scale-[1.02]"
@@ -134,9 +186,13 @@ export default function CartDrawer() {
                 <Lock className="h-4 w-4" />
                 Prejsť k pokladni
               </button>
-              <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
-                <Check className="h-3.5 w-3.5 text-eco" /> 30 dní na vrátenie · bezpečná platba
-              </p>
+
+              {/* dôvera */}
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                <span className="inline-flex items-center gap-1"><RotateCcw className="h-3.5 w-3.5 text-eco" /> 30 dní na vrátenie</span>
+                <span className="inline-flex items-center gap-1"><ShieldCheck className="h-3.5 w-3.5 text-eco" /> Bezpečná platba</span>
+                <span className="inline-flex items-center gap-1"><Truck className="h-3.5 w-3.5 text-eco" /> Doručenie 1–2 dni</span>
+              </div>
             </footer>
           </>
         )}

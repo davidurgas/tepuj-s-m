@@ -178,13 +178,19 @@ export default function HeroSlider() {
                   webkit-playsinline="true"
                 />
               ) : (
-                <img src={s.media} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                <img
+                  src={s.media}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover object-[72%_center] sm:object-center"
+                />
               )}
 
-              <div className={`absolute inset-0 ${s.overlay ?? "bg-secondary/60"}`} />
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary/70 via-transparent to-transparent" />
+              {/* Prekrytie: mobil tmavší dole (fotka hore vidieť), desktop gradient zľava */}
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/55 to-secondary/25 sm:hidden" />
+              <div className="absolute inset-0 hidden bg-gradient-to-r from-secondary/90 via-secondary/40 to-transparent sm:block" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-secondary/50 to-transparent" />
 
-              <div className="relative z-10 flex h-full items-center">
+              <div className="relative z-10 flex h-full items-end pb-28 sm:items-center sm:pb-0">
                 <div className="container-tight">
                   <div className="max-w-2xl">
                     {s.badge ? <BadgePill badge={s.badge} /> : <span className="kicker !text-white/70 before:!bg-accent">{s.kicker}</span>}

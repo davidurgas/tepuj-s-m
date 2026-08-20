@@ -9,6 +9,7 @@ import {
   Check,
   Plus,
   Leaf,
+  ShieldCheck,
 } from "lucide-react";
 import { products, type Product } from "@/lib/droply-data";
 import { useCart } from "./cart-context";
@@ -81,6 +82,9 @@ function ProductCard({ product }: { product: Product }) {
           </span>
           <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
             {product.scent}
+          </span>
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+            <ShieldCheck className="h-3 w-3" /> Vyrobené v EÚ
           </span>
         </div>
 
