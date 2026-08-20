@@ -7,10 +7,20 @@ import AccountDrawer from "./AccountDrawer";
 import SupportChat from "./SupportChat";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    if (hash) {
+      // počkaj na vykreslenie cieľovej sekcie
+      const id = hash.slice(1);
+      requestAnimationFrame(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        else window.scrollTo(0, 0);
+      });
+      return;
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 }
 

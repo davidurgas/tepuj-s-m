@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X, Plus, Minus, Check, ShoppingBag } from "lucide-react";
-import { products, type Bundle } from "@/lib/droply-data";
+import { products, getCategory, type Bundle } from "@/lib/droply-data";
 import { useCart } from "./cart-context";
 
 /**
@@ -26,7 +26,7 @@ export default function BundleBuilder({ bundle, onClose }: { bundle: Bundle; onC
   const addToCart = () => {
     const mix = products
       .filter((p) => counts[p.id])
-      .map((p) => `${p.name} ×${counts[p.id]}`)
+      .map((p) => `${getCategory(p.categoryId).name} · ${p.scent} ×${counts[p.id]}`)
       .join(", ");
     add({
       id: `bundle-${bundle.id}-${Date.now()}`,
@@ -71,9 +71,9 @@ export default function BundleBuilder({ bundle, onClose }: { bundle: Bundle; onC
             const c = counts[p.id] ?? 0;
             return (
               <div key={p.id} className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3">
-                <img src={p.image} alt={p.name} className="h-14 w-14 shrink-0 rounded-xl object-cover" loading="lazy" />
+                <img src={p.image} alt={p.scent} className="h-14 w-14 shrink-0 rounded-xl object-cover" loading="lazy" />
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold">{p.name}</p>
+                  <p className="truncate text-sm font-semibold">{getCategory(p.categoryId).name}</p>
                   <p className="truncate text-xs text-muted-foreground">{p.scent}</p>
                 </div>
                 <div className="flex items-center gap-1 rounded-full border border-border">

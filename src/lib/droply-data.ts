@@ -1,19 +1,26 @@
-export type Product = {
-  id: string;
+export type CategoryId = "univerzal" | "kuchyna" | "sklo" | "kupelna" | "podlahy" | "pranie";
+export type IconKey = "universal" | "kitchen" | "glass" | "bathroom" | "floor" | "laundry";
+
+export type Category = {
+  id: CategoryId;
   name: string;
   tagline: string;
-  /** kľúč ikony/farby v UI */
-  theme: "kitchen" | "glass" | "bathroom" | "floor" | "universal" | "laundry";
-  /** reálna fotografia produktu */
   image: string;
-  /** poloha orezania fotky v štvorcovej karte */
-  imagePosition?: string;
+  icon: IconKey;
+};
+
+export type Product = {
+  id: string;
+  categoryId: CategoryId;
+  /** vôňa / funkcia varianty */
+  scent: string;
+  tagline: string;
+  image: string;
   price: number;
   /** pôvodná (prečiarknutá) cena — kotvenie / anchoring */
   compareAt: number;
   /** koľko fliaš nahradí jedno balenie (10 tabliet) */
   replacesBottles: number;
-  scent: string;
   rating: number;
   reviews: number;
   /** simulovaná dostupnosť pre efekt vzácnosti */
@@ -51,99 +58,66 @@ export const BANNER_SALE = `${CDN}/hf_20260819_154949_f35dade2-7d66-435e-afa4-6c
 export const BANNER_BEST = `${CDN}/hf_20260819_155148_2b1f96c0-f338-43b0-af6e-c423c587cfb5.png`;
 export const BANNER_ECO = `${CDN}/hf_20260819_154949_0332d10c-aad3-48d9-8629-4bd103515797.png`;
 
-export const products: Product[] = [
-  {
-    id: "universal",
-    name: "Univerzál",
-    tagline: "Jedna tableta na (takmer) všetko v domácnosti",
-    theme: "universal",
-    image: IMG.universal,
-    imagePosition: "center",
-    price: 4.9,
-    compareAt: 7.9,
-    replacesBottles: 5,
-    scent: "Sviežа bavlna",
-    rating: 4.9,
-    reviews: 1243,
-    stock: 38,
-    badge: "Bestseller",
-    bestseller: true,
-  },
-  {
-    id: "kitchen",
-    name: "Kuchyňa",
-    tagline: "Odmasťovač, ktorý si poradí aj s pripáleným tukom",
-    theme: "kitchen",
-    image: IMG.kitchen,
-    price: 4.9,
-    compareAt: 7.9,
-    replacesBottles: 5,
-    scent: "Citrus & limetka",
-    rating: 4.8,
-    reviews: 862,
-    stock: 24,
-    badge: "Silný odmasťovač",
-  },
-  {
-    id: "glass",
-    name: "Okná & Sklo",
-    tagline: "Bez šmúh a bez rozprašovania litrov chémie",
-    theme: "glass",
-    image: IMG.glass,
-    price: 4.5,
-    compareAt: 6.9,
-    replacesBottles: 6,
-    scent: "Bez parfumu",
-    rating: 4.9,
-    reviews: 517,
-    stock: 51,
-    badge: "Bez šmúh",
-  },
-  {
-    id: "bathroom",
-    name: "Kúpeľňa",
-    tagline: "Vodný kameň a mydlové usadeniny nemajú šancu",
-    theme: "bathroom",
-    image: IMG.bathroom,
-    price: 4.9,
-    compareAt: 7.9,
-    replacesBottles: 5,
-    scent: "Morský vánok",
-    rating: 4.8,
-    reviews: 634,
-    stock: 12,
-    badge: "Posledné kusy",
-  },
-  {
-    id: "floor",
-    name: "Podlahy",
-    tagline: "Rýchloschnúca formula pre laminát, dlažbu aj drevo",
-    theme: "floor",
-    image: IMG.floor,
-    price: 4.9,
-    compareAt: 7.9,
-    replacesBottles: 6,
-    scent: "Eukalyptus",
-    rating: 4.7,
-    reviews: 389,
-    stock: 44,
-  },
-  {
-    id: "laundry",
-    name: "Prací gél",
-    tagline: "Koncentrované tablety – rozpustia sa priamo v bubne",
-    theme: "laundry",
-    image: IMG.laundry,
-    price: 5.9,
-    compareAt: 9.9,
-    replacesBottles: 4,
-    scent: "Levanduľa",
-    rating: 4.9,
-    reviews: 726,
-    stock: 29,
-    badge: "Novinka",
-  },
+export const categories: Category[] = [
+  { id: "univerzal", name: "Univerzál", tagline: "Jedna tableta na (takmer) všetko v domácnosti", image: IMG.universal, icon: "universal" },
+  { id: "kuchyna", name: "Kuchyňa", tagline: "Odmasťovače a čističe do kuchyne", image: IMG.kitchen, icon: "kitchen" },
+  { id: "sklo", name: "Okná & sklo", tagline: "Bez šmúh a bez rozprašovania litrov chémie", image: IMG.glass, icon: "glass" },
+  { id: "kupelna", name: "Kúpeľňa", tagline: "Vodný kameň a usadeniny nemajú šancu", image: IMG.bathroom, icon: "bathroom" },
+  { id: "podlahy", name: "Podlahy", tagline: "Rýchloschnúce na laminát, dlažbu aj drevo", image: IMG.floor, icon: "floor" },
+  { id: "pranie", name: "Pranie", tagline: "Koncentrované pracie tablety priamo do bubna", image: IMG.laundry, icon: "laundry" },
 ];
+
+const IMG_BY_CAT: Record<CategoryId, string> = {
+  univerzal: IMG.universal,
+  kuchyna: IMG.kitchen,
+  sklo: IMG.glass,
+  kupelna: IMG.bathroom,
+  podlahy: IMG.floor,
+  pranie: IMG.laundry,
+};
+
+type Variant = Omit<Product, "image" | "categoryId" | "tagline"> & { tagline?: string };
+
+/** Skratka na vytvorenie variantov kategórie (zdieľajú fotku kategórie). */
+function cat(categoryId: CategoryId, tagline: string, variants: Variant[]): Product[] {
+  return variants.map((v) => ({ ...v, categoryId, image: IMG_BY_CAT[categoryId], tagline: v.tagline ?? tagline }));
+}
+
+export const products: Product[] = [
+  ...cat("univerzal", "Jedna tableta na (takmer) všetko v domácnosti", [
+    { id: "univerzal-bavlna", scent: "Sviežа bavlna", price: 4.9, compareAt: 7.9, replacesBottles: 5, rating: 4.9, reviews: 1243, stock: 38, badge: "Bestseller", bestseller: true },
+    { id: "univerzal-aloe", scent: "Aloe vera", price: 4.9, compareAt: 7.9, replacesBottles: 5, rating: 4.8, reviews: 521, stock: 47 },
+    { id: "univerzal-citrus", scent: "Citrus", price: 4.9, compareAt: 7.9, replacesBottles: 5, rating: 4.8, reviews: 388, stock: 33 },
+  ]),
+  ...cat("kuchyna", "Odmasťovač, ktorý si poradí aj s pripáleným tukom", [
+    { id: "kuchyna-citrus", scent: "Citrus & limetka", price: 4.9, compareAt: 7.9, replacesBottles: 5, rating: 4.8, reviews: 862, stock: 24, badge: "Bestseller", bestseller: true },
+    { id: "kuchyna-grep", scent: "Grapefruit", price: 4.9, compareAt: 7.9, replacesBottles: 5, rating: 4.7, reviews: 274, stock: 40 },
+    { id: "kuchyna-bez", scent: "Bez parfumu · extra silný", price: 5.2, compareAt: 8.5, replacesBottles: 5, rating: 4.8, reviews: 199, stock: 18, badge: "Silný odmasťovač" },
+  ]),
+  ...cat("sklo", "Bez šmúh a bez rozprašovania litrov chémie", [
+    { id: "sklo-bez", scent: "Bez parfumu · bez šmúh", price: 4.5, compareAt: 6.9, replacesBottles: 6, rating: 4.9, reviews: 517, stock: 51, badge: "Bez šmúh", bestseller: true },
+    { id: "sklo-sviezost", scent: "Sviežosť", price: 4.5, compareAt: 6.9, replacesBottles: 6, rating: 4.7, reviews: 233, stock: 44 },
+  ]),
+  ...cat("kupelna", "Vodný kameň a mydlové usadeniny nemajú šancu", [
+    { id: "kupelna-more", scent: "Morský vánok", price: 4.9, compareAt: 7.9, replacesBottles: 5, rating: 4.8, reviews: 634, stock: 12, badge: "Posledné kusy" },
+    { id: "kupelna-eukalyptus", scent: "Eukalyptus", price: 4.9, compareAt: 7.9, replacesBottles: 5, rating: 4.8, reviews: 341, stock: 36 },
+    { id: "kupelna-levandula", scent: "Levanduľa", price: 4.9, compareAt: 7.9, replacesBottles: 5, rating: 4.9, reviews: 288, stock: 29 },
+  ]),
+  ...cat("podlahy", "Rýchloschnúca formula pre laminát, dlažbu aj drevo", [
+    { id: "podlahy-eukalyptus", scent: "Eukalyptus", price: 4.9, compareAt: 7.9, replacesBottles: 6, rating: 4.7, reviews: 389, stock: 44 },
+    { id: "podlahy-citrus", scent: "Citrus", price: 4.9, compareAt: 7.9, replacesBottles: 6, rating: 4.7, reviews: 176, stock: 52 },
+  ]),
+  ...cat("pranie", "Koncentrované tablety – rozpustia sa priamo v bubne", [
+    { id: "pranie-levandula", scent: "Levanduľa", price: 5.9, compareAt: 9.9, replacesBottles: 4, rating: 4.9, reviews: 726, stock: 29, badge: "Novinka", bestseller: true },
+    { id: "pranie-bavlna", scent: "Sviežа bavlna", price: 5.9, compareAt: 9.9, replacesBottles: 4, rating: 4.8, reviews: 302, stock: 41 },
+    { id: "pranie-detsky", scent: "Detský · bez parfumu", price: 6.2, compareAt: 10.5, replacesBottles: 4, rating: 4.9, reviews: 158, stock: 22 },
+  ]),
+];
+
+export const getCategory = (id: CategoryId) => categories.find((c) => c.id === id)!;
+export const productsByCategory = (id: CategoryId) => products.filter((p) => p.categoryId === id);
+export const bestsellers = products.filter((p) => p.bestseller);
+export const productFullName = (p: Product) => `Droply ${getCategory(p.categoryId).name} · ${p.scent}`;
 
 export type Bundle = {
   id: string;

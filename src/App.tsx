@@ -7,6 +7,7 @@ import { AccountProvider } from "@/components/droply/account-context";
 import { CartProvider } from "@/components/droply/cart-context";
 import Layout from "@/components/droply/Layout";
 import Home from "./pages/Home";
+import ProductsPage from "./pages/ProductsPage";
 import HowPage from "./pages/HowPage";
 import PricingPage from "./pages/PricingPage";
 import ReviewsPage from "./pages/ReviewsPage";
@@ -25,8 +26,9 @@ const App = () => (
             <Routes>
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
+                <Route path="/produkty" element={<ProductsPage />} />
                 <Route path="/ako-funguje" element={<HowPage />} />
-                <Route path="/cennik" element={<PricingPage />} />
+                <Route path="/balicky" element={<PricingPage />} />
                 <Route path="/recenzie" element={<ReviewsPage />} />
               </Route>
               <Route path="*" element={<NotFound />} />

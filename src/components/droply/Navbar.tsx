@@ -7,8 +7,9 @@ import { useAccount } from "./account-context";
 
 const LINKS = [
   { to: "/", label: "Domov" },
+  { to: "/produkty", label: "Produkty" },
   { to: "/ako-funguje", label: "Ako to funguje" },
-  { to: "/cennik", label: "Cenník" },
+  { to: "/balicky", label: "Balíčky" },
   { to: "/recenzie", label: "Recenzie" },
 ];
 

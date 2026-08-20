@@ -6,8 +6,8 @@ const COLS = [
   {
     title: "Nákup",
     links: [
-      { label: "Produkty", to: "/" },
-      { label: "Balíčky / cenník", to: "/cennik" },
+      { label: "Produkty", to: "/produkty" },
+      { label: "Balíčky", to: "/balicky" },
       { label: "Ako to funguje", to: "/ako-funguje" },
       { label: "Recenzie", to: "/recenzie" },
     ],
@@ -17,15 +17,15 @@ const COLS = [
     links: [
       { label: "Prečo Droply", to: "/" },
       { label: "Kalkulačka úspor", to: "/ako-funguje" },
-      { label: "Časté otázky", to: "/cennik" },
-      { label: "Môj účet", to: "/" },
+      { label: "Časté otázky", to: "/balicky" },
+      { label: "Podľa kategórie", to: "/produkty" },
     ],
   },
   {
     title: "Podpora",
     links: [
-      { label: "Doprava a platba", to: "/cennik" },
-      { label: "Vrátenie tovaru", to: "/cennik" },
+      { label: "Doprava a platba", to: "/balicky" },
+      { label: "Vrátenie tovaru", to: "/balicky" },
       { label: "Obchodné podmienky", to: "#" },
       { label: "Ochrana súkromia", to: "#" },
     ],
