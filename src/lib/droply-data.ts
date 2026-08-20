@@ -34,7 +34,7 @@ const IMG = {
 };
 
 /** Hero video – logo vytlačené zvislo na plastovej fľaši, tableta sa reálne rozpúšťa (Higgsfield CDN). */
-export const DISSOLVE_VIDEO = `${CDN}/hf_20260820_070808_d9555663-93f0-46a6-8998-42416328995f.mp4`;
+export const DISSOLVE_VIDEO = `${CDN}/hf_20260820_070808_45fe2482-84a9-4e7b-95de-214219449ae3.mp4`;
 
 /** Video na bielom pozadí – pre sekciu „Ako funguje" (vytlačené logo, splýva s bielym pozadím). */
 export const DISSOLVE_VIDEO_WHITE = `${CDN}/hf_20260820_070820_cd0ed9cc-a420-4521-b119-e268fde6801c.mp4`;

@@ -2,10 +2,12 @@ import { useState } from "react";
 import { X, Plus, Minus, Trash2, ShoppingBag, Truck, Check, Lock, Tag, ShieldCheck, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { useCart, FREE_SHIPPING_THRESHOLD } from "./cart-context";
+import { useAccount } from "./account-context";
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, setQty, remove, total, count, clear, shipping, discount, discountCode, grandTotal, applyCode, removeCode } =
     useCart();
+  const { user, placeOrder, openAccount } = useAccount();
   const [code, setCode] = useState("");
 
   const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - total);
@@ -21,11 +23,22 @@ export default function CartDrawer() {
   const eur = (n: number) => `${n.toLocaleString("sk-SK", { minimumFractionDigits: 2 })} €`;
 
   const checkout = () => {
-    toast.success("Toto je demo — platobná brána zatiaľ nie je aktívna.", {
-      description: "V ostrej verzii by teraz nasledovala pokladňa a platba.",
+    if (!user) {
+      toast.info("Prihlás sa alebo si vytvor účet, aby sa objednávka uložila do histórie.");
+      closeCart();
+      openAccount();
+      return;
+    }
+    const order = placeOrder(
+      items.map((i) => ({ name: i.name, qty: i.qty, price: i.price, meta: i.meta })),
+      grandTotal,
+    );
+    toast.success(`Objednávka ${order ? "#" + order.id : ""} vytvorená! (demo)`, {
+      description: "Nájdeš ju vo svojom účte. Platobná brána zatiaľ nie je aktívna.",
     });
     clear();
     closeCart();
+    openAccount();
   };
 
   return (

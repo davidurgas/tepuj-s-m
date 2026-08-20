@@ -1,4 +1,5 @@
 import { CartProvider } from "@/components/droply/cart-context";
+import { AccountProvider } from "@/components/droply/account-context";
 import Navbar from "@/components/droply/Navbar";
 import HeroSlider from "@/components/droply/HeroSlider";
 import TrustBar from "@/components/droply/TrustBar";
@@ -15,10 +16,12 @@ import Faq from "@/components/droply/Faq";
 import Newsletter from "@/components/droply/Newsletter";
 import Footer from "@/components/droply/Footer";
 import CartDrawer from "@/components/droply/CartDrawer";
+import AccountDrawer from "@/components/droply/AccountDrawer";
 
 const Index = () => {
   return (
-    <CartProvider>
+    <AccountProvider>
+      <CartProvider>
       <div className="min-h-screen bg-background">
         <Navbar />
         <main>
@@ -38,8 +41,10 @@ const Index = () => {
         </main>
         <Footer />
         <CartDrawer />
+        <AccountDrawer />
       </div>
-    </CartProvider>
+      </CartProvider>
+    </AccountProvider>
   );
 };
 

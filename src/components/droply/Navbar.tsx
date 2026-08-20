@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { ShoppingBag, Menu, X, Truck, Droplet } from "lucide-react";
+import { ShoppingBag, Menu, X, Truck, Droplet, User } from "lucide-react";
 import Logo from "./Logo";
 import { useCart } from "./cart-context";
+import { useAccount } from "./account-context";
 
 const LINKS = [
   { href: "#ako", label: "Ako to funguje" },
@@ -15,6 +16,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { count, openCart } = useCart();
+  const { user, openAccount } = useAccount();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -60,6 +62,15 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
+            <button
+              onClick={openAccount}
+              className="relative inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3.5 py-2.5 text-sm font-semibold text-foreground backdrop-blur transition-colors hover:bg-card"
+              aria-label="Môj účet"
+            >
+              <User className="h-4 w-4" />
+              <span className="hidden sm:inline">{user ? user.name.split(" ")[0] : "Účet"}</span>
+              {user && <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-eco ring-2 ring-background" />}
+            </button>
             <button
               onClick={openCart}
               className="relative inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-card transition-transform hover:scale-105"
