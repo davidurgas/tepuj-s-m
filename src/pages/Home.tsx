@@ -1,4 +1,4 @@
-import DissolveHero from "@/components/droply/DissolveHero";
+import HeroSlider from "@/components/droply/HeroSlider";
 import TrustBar from "@/components/droply/TrustBar";
 import Benefits from "@/components/droply/Benefits";
 import CategoryTiles from "@/components/droply/CategoryTiles";
@@ -9,7 +9,7 @@ import Newsletter from "@/components/droply/Newsletter";
 export default function Home() {
   return (
     <>
-      <DissolveHero />
+      <HeroSlider />
       <TrustBar />
       <Benefits />
       <CategoryTiles />
