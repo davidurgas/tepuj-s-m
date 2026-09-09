@@ -6,7 +6,6 @@ import {
   BellRing,
   Gift,
   LogOut,
-  MapPin,
   Smartphone,
   Star,
   Wallet,
@@ -14,11 +13,7 @@ import {
 import { toast } from "sonner";
 import { useLoyalty } from "@/components/loyalty/loyalty-context";
 import StampCard from "@/components/loyalty/StampCard";
-import {
-  loyaltyConfig,
-  googleReviewUrl,
-  distanceMeters,
-} from "@/lib/loyalty-config";
+import { loyaltyConfig, googleReviewUrl } from "@/lib/loyalty-config";
 import {
   Dialog,
   DialogContent,
@@ -60,6 +55,7 @@ export default function LoyaltyPage() {
           <div className="mb-6 text-center">
             <h1 className="text-3xl font-extrabold">{loyaltyConfig.brand}</h1>
             <p className="mt-2 text-muted-foreground">{loyaltyConfig.tagline}</p>
+            <p className="mt-2 text-xs text-muted-foreground">Tepovanie: {loyaltyConfig.cities.join(" · ")}</p>
           </div>
 
           <div className="mb-4 flex rounded-full bg-muted p-1 text-sm font-semibold">
@@ -195,7 +191,7 @@ function MemberView({
       </div>
 
       {/* Žiadosť o Google recenziu (podľa polohy) */}
-      {m.pendingReview && <ReviewPrompt onDone={onDismissReview} />}
+      {m.pendingReview && <ReviewPrompt memberId={m.id} onDone={onDismissReview} />}
 
       {/* Pečiatková karta */}
       <StampCard stamps={m.stamps} />
@@ -245,6 +241,9 @@ function MemberView({
       </div>
 
       <p className="mt-6 text-center text-xs text-muted-foreground">
+        {loyaltyConfig.contact.web} · {loyaltyConfig.contact.phone} · {loyaltyConfig.contact.email}
+      </p>
+      <p className="mt-1 text-center text-xs text-muted-foreground">
         Ste prevádzka? <Link to="/vernost/admin" className="font-semibold text-primary underline">Otvoriť panel pre personál →</Link>
       </p>
 
@@ -287,31 +286,25 @@ function Stat({ label, value }: { label: string; value: number }) {
   );
 }
 
-/** Žiadosť o Google recenziu s kontrolou polohy (geolokácia). */
-function ReviewPrompt({ onDone }: { onDone: () => void }) {
-  const [status, setStatus] = useState<"idle" | "checking" | "near" | "far" | "denied">("idle");
-  const [dist, setDist] = useState<number | null>(null);
+/**
+ * Žiadosť o hodnotenie po tepovaní — „hviezdičková brána":
+ * spokojní (≥ prah) idú na Google, nespokojní dajú súkromnú spätnú väzbu.
+ */
+function ReviewPrompt({ memberId, onDone }: { memberId: string; onDone: () => void }) {
+  const { recordReview } = useLoyalty();
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  const [comment, setComment] = useState("");
+  const [done, setDone] = useState(false);
+  const happy = rating >= loyaltyConfig.reviewThreshold;
 
-  const check = () => {
-    if (!("geolocation" in navigator)) {
-      // Bez geolokácie ponúkneme recenziu tak či tak.
-      setStatus("near");
-      return;
-    }
-    setStatus("checking");
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const d = distanceMeters(
-          { lat: pos.coords.latitude, lng: pos.coords.longitude },
-          { lat: loyaltyConfig.place.lat, lng: loyaltyConfig.place.lng },
-        );
-        setDist(Math.round(d));
-        setStatus(d <= loyaltyConfig.place.radiusMeters ? "near" : "far");
-      },
-      () => setStatus("denied"),
-      { enableHighAccuracy: true, timeout: 8000 },
+  if (done) {
+    return (
+      <div className="mb-4 rounded-2xl border-2 border-eco bg-eco/10 p-4 text-sm">
+        Ďakujeme za spätnú väzbu! 🙏 Vážime si každý názor a pomáha nám zlepšovať sa.
+      </div>
     );
-  };
+  }
 
   return (
     <div className="mb-4 rounded-2xl border-2 border-sunny bg-sunny/10 p-4">
@@ -319,38 +312,65 @@ function ReviewPrompt({ onDone }: { onDone: () => void }) {
         <Star className="mt-0.5 h-6 w-6 shrink-0 text-sunny" />
         <div className="flex-1">
           <p className="font-bold">Ako sme zvládli tepovanie?</p>
-          <p className="text-sm text-muted-foreground">
-            Ak ste boli spokojní, ohodnoťte nás prosím na Google — pomôže to iným zákazníkom.
-          </p>
+          <p className="text-sm text-muted-foreground">Ohodnoťte nás — zaberie to pár sekúnd.</p>
 
-          {status === "idle" && (
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button onClick={check} className="inline-flex items-center gap-1.5 rounded-full bg-sunny px-4 py-2 text-sm font-semibold text-sunny-foreground">
-                <MapPin className="h-4 w-4" /> Overiť polohu a hodnotiť
+          {/* Hviezdy */}
+          <div className="mt-2 flex gap-1" onMouseLeave={() => setHover(0)}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                key={n}
+                onClick={() => setRating(n)}
+                onMouseEnter={() => setHover(n)}
+                aria-label={`${n} hviezdičiek`}
+                className="p-0.5"
+              >
+                <Star className={`h-8 w-8 transition ${(hover || rating) >= n ? "fill-sunny text-sunny" : "text-muted-foreground/40"}`} />
               </button>
-              <button onClick={onDone} className="rounded-full px-3 py-2 text-sm text-muted-foreground">Neskôr</button>
+            ))}
+          </div>
+
+          {rating > 0 && happy && (
+            <div className="mt-3">
+              <p className="mb-2 text-sm text-muted-foreground">Super, ďakujeme! Podelíte sa aj na Google?</p>
+              <a
+                href={googleReviewUrl()}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => {
+                  recordReview(memberId, rating);
+                  onDone();
+                }}
+                className="inline-flex items-center gap-1.5 rounded-full bg-sunny px-4 py-2 text-sm font-semibold text-sunny-foreground"
+              >
+                <Star className="h-4 w-4" /> Ohodnotiť na Google
+              </a>
             </div>
           )}
-          {status === "checking" && <p className="mt-3 text-sm text-muted-foreground">Zisťujem polohu…</p>}
-          {(status === "near" || status === "denied") && (
-            <a
-              href={googleReviewUrl()}
-              target="_blank"
-              rel="noreferrer"
-              onClick={onDone}
-              className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sunny px-4 py-2 text-sm font-semibold text-sunny-foreground"
-            >
-              <Star className="h-4 w-4" /> Napísať recenziu na Google
-            </a>
+
+          {rating > 0 && !happy && (
+            <div className="mt-3">
+              <p className="mb-2 text-sm text-muted-foreground">Mrzí nás to. Čo môžeme zlepšiť? (napíšete len nám)</p>
+              <textarea
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+                rows={3}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Vaša spätná väzba…"
+              />
+              <button
+                onClick={() => {
+                  recordReview(memberId, rating, comment);
+                  setDone(true);
+                }}
+                className="mt-2 rounded-full bg-secondary px-4 py-2 text-sm font-semibold text-secondary-foreground"
+              >
+                Odoslať spätnú väzbu
+              </button>
+            </div>
           )}
-          {status === "far" && (
-            <p className="mt-3 text-sm text-muted-foreground">
-              Zdá sa, že nie ste na mieste služby ({dist} m). Recenziu môžete napísať aj tak:{" "}
-              <a href={googleReviewUrl()} target="_blank" rel="noreferrer" onClick={onDone} className="font-semibold text-primary underline">
-                otvoriť Google
-              </a>
-              .
-            </p>
+
+          {rating === 0 && (
+            <button onClick={onDone} className="mt-2 text-sm text-muted-foreground underline">Neskôr</button>
           )}
         </div>
       </div>

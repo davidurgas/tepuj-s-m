@@ -66,6 +66,8 @@ type LoyaltyCtx = {
   redeemReward: (id: string) => Result;
   markNotificationsRead: (id: string) => void;
   clearPendingReview: (id: string) => void;
+  /** Zaznamená hodnotenie od zákazníka (hviezdy + voliteľný komentár). */
+  recordReview: (id: string, rating: number, comment?: string) => void;
 };
 
 const MEMBERS_KEY = "loyalty-members";
@@ -288,6 +290,22 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
     [persist],
   );
 
+  const recordReview = useCallback(
+    (id: string, rating: number, comment?: string) => {
+      const store = loadMembers();
+      const m = store[id];
+      if (!m) return;
+      const stars = "★".repeat(rating) + "☆".repeat(Math.max(0, 5 - rating));
+      const label = comment?.trim()
+        ? `Hodnotenie ${stars} — „${comment.trim()}"`
+        : `Hodnotenie ${stars}`;
+      m.history = [{ id: `E${Date.now()}`, type: "review", label, at: new Date().toISOString() }, ...m.history];
+      m.pendingReview = false;
+      persist(store);
+    },
+    [persist],
+  );
+
   const value = useMemo<LoyaltyCtx>(
     () => ({
       members,
@@ -300,8 +318,9 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
       redeemReward,
       markNotificationsRead,
       clearPendingReview,
+      recordReview,
     }),
-    [members, currentId, join, loginById, logout, addStamp, requestReview, redeemReward, markNotificationsRead, clearPendingReview],
+    [members, currentId, join, loginById, logout, addStamp, requestReview, redeemReward, markNotificationsRead, clearPendingReview, recordReview],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
