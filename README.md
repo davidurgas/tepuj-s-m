@@ -22,6 +22,33 @@ litrov z obchodu — rovnaká čistota.
 - **Recenzie**, **FAQ**, **newsletter** so zľavovým kódom.
 - **Košík (drawer)** s progresom „doprava zdarma“.
 
+## 🎟️ Vernostný program (ako Rewardly)
+
+Digitálna vernostná karta pre zákazníkov — celé to beží v prehliadači (demo bez
+servera, dáta v `localStorage`).
+
+- **Zákazník:** `/vernost` — založí si kartu, dostane vlastný **QR kód a ID**
+  (`TS-XXXX`), zbiera **pečiatky**, vidí postup k odmene, upozornenia a tlačidlá
+  „Pridať do peňaženky" a „Ohodnotiť na Google".
+- **Personál:** `/vernost/admin` — nájde zákazníka (ID / meno / kontakt),
+  **pridá pečiatku**, alebo po dokončení služby klikne **„Tepovanie hotové →
+  požiadať o recenziu"**.
+- **Pečiatky a odmena:** po `stampsPerReward` pečiatkach vznikne odmena; všetko
+  sa nastavuje v `src/lib/loyalty-config.ts` (názov firmy, počet pečiatok,
+  odmena, GPS prevádzky, Google Place ID).
+- **Upozornenia:** používa **Web Notifications API** (personál ich povolí
+  tlačidlom). Zobrazia sa pri pečiatke, odmene aj žiadosti o recenziu.
+- **Google recenzia podľa polohy:** po tepovaní appka cez **geolokáciu** overí,
+  či je zákazník blízko prevádzky (`place.radiusMeters`) a ponúkne priamy odkaz
+  na napísanie recenzie (`googleReviewUrl()`).
+- **Karta do telefónu:** QR kód + skratka na plochu (PWA). Natívny Apple/Google
+  Wallet pas vyžaduje serverovú časť — pozri poznámku v dialógu „Pridať do
+  peňaženky".
+
+> Čo treba na **ostrú verziu**: databáza namiesto `localStorage`, serverové API
+> pre pečiatky, reálny **web push** (service worker + VAPID) na upozornenia aj
+> keď je appka zavretá, a podpísané **.pkpass / Google Wallet** pasy.
+
 ## Prvky psychológie predaja
 
 Social proof (recenzie, hodnotenia), kotvenie (prečiarknuté ceny), vzácnosť

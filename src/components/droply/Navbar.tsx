@@ -11,6 +11,7 @@ const LINKS = [
   { to: "/ako-funguje", label: "Ako to funguje" },
   { to: "/balicky", label: "Balíčky" },
   { to: "/recenzie", label: "Recenzie" },
+  { to: "/vernost", label: "Vernostný klub" },
 ];
 
 export default function Navbar() {
