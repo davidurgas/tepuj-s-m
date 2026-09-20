@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F52BA"/>
+      <stop offset="1" stop-color="#0B3E8C"/>
+    </linearGradient>
+    <linearGradient id="m" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2C6FE0"/>
+      <stop offset="1" stop-color="#0F52BA"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="960" cy="315" r="290" fill="#ffffff" opacity="0.06"/>
+  <circle cx="960" cy="315" r="210" fill="#ffffff" opacity="0.06"/>
+
+  <!-- machine -->
+  <g transform="translate(840,190)">
+    <rect x="0" y="0" width="200" height="220" rx="30" fill="url(#m)"/>
+    <rect x="28" y="38" width="144" height="86" rx="16" fill="#fff" opacity="0.92"/>
+    <circle cx="100" cy="80" r="30" fill="#FF5A36"/>
+    <circle cx="100" cy="80" r="13" fill="#fff"/>
+    <rect x="40" y="150" width="120" height="20" rx="10" fill="#0B3E8C"/>
+  </g>
+
+  <!-- text -->
+  <text x="90" y="180" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="34" font-weight="700" fill="#FF9E85">POŽIČAJTEPOVAČ.sk</text>
+  <text x="90" y="270" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="70" font-weight="800" fill="#ffffff">Požičovňa</text>
+  <text x="90" y="345" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="70" font-weight="800" fill="#ffffff">tepovačov</text>
+  <text x="90" y="420" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="70" font-weight="800" fill="#FF5A36">Bratislava</text>
+
+  <g font-family="'Inter', Arial, sans-serif" font-size="30" fill="#DCE9FD">
+    <text x="92" y="500">30 € / deň  ·  50 € / víkend  ·  chémia v cene</text>
+    <text x="92" y="545">Dovoz po BA 10 €  ·  osobný odber zadarmo</text>
+  </g>
+</svg>
