@@ -20,9 +20,8 @@ pozicajtepovac/
 │   └── img/
 │       ├── favicon.svg         # Logo / favicon (prepracovaný emblém s gradientom)
 │       ├── og-image.svg        # Zdroj OpenGraph obrázka (editovateľný)
-│       ├── og-image.jpg        # Vyrenderovaný OG obrázok 1200×630 (pre sociálne siete)
-│       ├── download-photos.sh  # Stiahne AI placeholder fotky (photo-*.webp) do tohto priečinka
-│       └── photo-*.webp        # Fotky do galérie/hera (stiahni skriptom alebo nahraď vlastnými)
+│       └── og-image.jpg        # Vyrenderovaný OG obrázok 1200×630 (pre sociálne siete)
+│                               # (fotky Puzzi 8/1 sem doplníš sám – pozri sekciu Fotky nižšie)
 ├── wordpress/
 │   ├── page-pozicajtepovac.php # WordPress page template (rovnaký obsah ako index.html)
 │   └── functions-snippet.php   # Voliteľné optimalizácie do functions.php
@@ -59,15 +58,14 @@ Písmo: **Plus Jakarta Sans** (nadpisy) + **Inter** (text) z Google Fonts
 - **Ovládanie jednou rukou** — sticky spodná CTA lišta na mobile, veľké dotykové ciele (44px+).
 - **Ikony a logo sú inline SVG** (ostré na retine, nulové HTTP requesty). Logo je
   prepracovaný emblém s gradientom (hubica tepovača + kvapka), zdroj v `assets/img/favicon.svg`.
-- **Fotky sú vo formáte WebP** a majú `loading="lazy"` + `width`/`height` (proti CLS).
-  Hero fotka stroja má `fetchpriority="high"` (je nad ohybom).
-- **Galéria** (sekcia „Tepovač v akcii") a hero fotka sú **AI vygenerované placeholdery**
-  v našich brand farbách (modrý stroj typu Puzzi + coral). Slúžia na dôveryhodnú prezentáciu
-  do spustenia – **pred ostrým štartom ich nahraď reálnymi fotkami vášho stroja a výsledkov.**
-  - `index.html` (náhľad) načítava fotky priamo z CDN → funguje hneď.
-  - `page-pozicajtepovac.php` (WordPress) očakáva **lokálne** súbory `assets/img/photo-*.webp`.
-    Stiahni ich skriptom `bash assets/img/download-photos.sh`, alebo rovno nahraď vlastnými
-    (rovnaké názvy). Fotky ukladaj ako **WebP** (poistka lazy loadingu je vo `functions-snippet.php`).
+- **Fotky = miesta pre vlastné fotky (placeholdery).** Web NEobsahuje žiadne generické ani
+  AI fotky. Hero aj galéria („Tepovač v akcii") sú prázdne, dizajnovo ladené sloty s popisom.
+  **Vlož vlastné reálne fotky vášho Kärcher Puzzi 8/1 a výsledkov:**
+  - Ulož fotky do `assets/img/` ako **WebP** (napr. `puzzi.webp`, `sedacka.webp`…).
+  - V `index.html` / `page-pozicajtepovac.php` nahraď blok `<div class="photo-slot …">…</div>`
+    tagom `<img src="assets/img/puzzi.webp" alt="…" loading="lazy" width="…" height="…">`
+    (v HTML pri každom slote je príklad v komentári).
+  - Fotky maj `loading="lazy"` + `width`/`height` (proti CLS); hero fotku daj `fetchpriority="high"`.
 - **OG obrázok** (`og-image.jpg`) sa nenačítava návštevníkom (číta ho len scraper sociálnej siete).
 - **JS `defer`** — skript sa načíta neblokujúco.
 - **Preconnect/preload** pre Google Fonts.

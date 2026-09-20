@@ -140,13 +140,11 @@ get_header();
 				<p class="hero__trust">Od <strong>30 € / deň</strong> · Kaucia 100 € vrátená ihneď · Bez skrytých poplatkov</p>
 			</div>
 			<div class="hero__visual">
-				<div class="hero__photo-wrap">
-					<img class="hero__photo" src="<?php echo esc_url( $pt_uri . '/img/photo-machine.webp' ); ?>" width="896" height="1120" fetchpriority="high" decoding="async" alt="Profesionálny tepovač na prenájom v Bratislave">
-				</div>
-				<div class="hero__badge">
-					<span class="hero__badge-num">4.9</span>
-					<span class="hero__badge-stars">★★★★★</span>
-					<span class="hero__badge-label">spokojní zákazníci</span>
+				<?php // MIESTO PRE FOTKU: nahraď blok tagom <img src="<?php echo esc_url( $pt_uri . '/img/puzzi.webp' ); ?>" ...> ?>
+				<div class="photo-slot photo-slot--hero">
+					<svg class="photo-slot__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.4-2h7.2L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="13" r="3.2" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+					<span class="photo-slot__title">Sem príde foto vášho tepovača</span>
+					<span class="photo-slot__sub">Kärcher Puzzi 8/1</span>
 				</div>
 			</div>
 		</div>
@@ -188,23 +186,24 @@ get_header();
 				<h2 class="section__title">Tepovač v akcii</h2>
 				<p class="section__lead">Sedačky, koberce aj auto – takto vyzerá výsledok, keď si vytepuješ interiér sám.</p>
 			</header>
+			<?php // MIESTA PRE FOTKY: každý blok nahraď <figure class="gallery__item"><img src="..."><figcaption>...</figcaption></figure> ?>
 			<div class="gallery">
-				<figure class="gallery__item gallery__item--wide">
-					<img loading="lazy" decoding="async" width="1024" height="688" src="<?php echo esc_url( $pt_uri . '/img/photo-sofa.webp' ); ?>" alt="Čistenie sedačky profesionálnym tepovačom">
-					<figcaption>Hĺbkové čistenie sedačky</figcaption>
-				</figure>
-				<figure class="gallery__item">
-					<img loading="lazy" decoding="async" width="1024" height="688" src="<?php echo esc_url( $pt_uri . '/img/photo-stripe.webp' ); ?>" alt="Rozdiel medzi znečistenou a vytepovanou látkou">
-					<figcaption>Vidno rozdiel na prvý ťah</figcaption>
-				</figure>
-				<figure class="gallery__item">
-					<img loading="lazy" decoding="async" width="1024" height="688" src="<?php echo esc_url( $pt_uri . '/img/photo-car.webp' ); ?>" alt="Tepovanie sedadla v aute">
-					<figcaption>Aj interiér auta ako nový</figcaption>
-				</figure>
-				<figure class="gallery__item gallery__item--wide">
-					<img loading="lazy" decoding="async" width="1024" height="688" src="<?php echo esc_url( $pt_uri . '/img/photo-delivery.webp' ); ?>" alt="Dovoz tepovača zákazníkovi v Bratislave">
-					<figcaption>Dovezieme ti ho až k dverám</figcaption>
-				</figure>
+				<div class="gallery__item gallery__item--wide photo-slot">
+					<svg class="photo-slot__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.4-2h7.2L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="13" r="3.2" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+					<span class="photo-slot__title">Čistenie sedačky</span>
+				</div>
+				<div class="gallery__item photo-slot">
+					<svg class="photo-slot__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.4-2h7.2L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="13" r="3.2" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+					<span class="photo-slot__title">Before / after</span>
+				</div>
+				<div class="gallery__item photo-slot">
+					<svg class="photo-slot__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.4-2h7.2L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="13" r="3.2" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+					<span class="photo-slot__title">Interiér auta</span>
+				</div>
+				<div class="gallery__item gallery__item--wide photo-slot">
+					<svg class="photo-slot__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.4-2h7.2L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="13" r="3.2" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+					<span class="photo-slot__title">Dovoz / odovzdanie</span>
+				</div>
 			</div>
 		</div>
 	</section>
