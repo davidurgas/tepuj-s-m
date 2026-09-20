@@ -1,6 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <rect width="32" height="32" rx="8" fill="#0F52BA"/>
-  <path d="M9 21c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-  <circle cx="16" cy="10.5" r="2.3" fill="#FF5A36"/>
-  <path d="M12.5 24.5h7" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- handle -->
+  <path d="M22 6.6 17 13" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+  <!-- extraction nozzle head -->
+  <path d="M14 12.6 19.4 12.6 22.8 18.4 10.3 18.4Z" fill="#fff"/>
+  <rect x="11.6" y="16.5" width="10" height="1.9" rx="0.95" fill="#0F52BA"/>
+  <!-- cleaned carpet surface -->
+  <path d="M7.5 24.2c3-1.5 14-1.5 17 0" stroke="#8FC0FF" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <!-- water droplet -->
+  <path d="M16.4 19.6c-1 1.4-1.6 2.1-1.6 2.9a1.6 1.6 0 0 0 3.2 0c0-.8-.6-1.5-1.6-2.9Z" fill="#FF5A36"/>
 </svg>

@@ -182,7 +182,7 @@ get_header();
 			</header>
 			<ol class="steps">
 				<li class="step"><span class="step__num">1</span><h3 class="step__title">Zvoľ si termín a odber</h3><p>Online si vyber deň a spôsob odberu – dovoz po Bratislave za 10 € alebo osobný odber zadarmo.</p></li>
-				<li class="step"><span class="step__num">2</span><h3 class="step__title">Prevezmi stroj a zálohu</h3><p>Pri prevzatí zložíš vratnú zálohu 100 € a absolvuješ 2-minútové predvedenie – ukážeme ti všetko potrebné.</p></li>
+				<li class="step"><span class="step__num">2</span><h3 class="step__title">Prevezmi stroj</h3><p>Pri prevzatí zložíš vratnú zálohu 100 € a absolvuješ 2-minútové predvedenie – ukážeme ti všetko potrebné.</p></li>
 				<li class="step"><span class="step__num">3</span><h3 class="step__title">Vytepuj a vráť stroj</h3><p>Vytepuj svoj interiér a po odovzdaní funkčného stroja dostaneš zálohu 100 € ihneď späť.</p></li>
 			</ol>
 		</div>
@@ -222,7 +222,7 @@ get_header();
 					<ul class="plan__features">
 						<li>Prenájom piatok poobede – pondelok ráno</li>
 						<li><strong>Dvojitá dávka</strong> čistiacej chémie v cene</li>
-						<li>Hubica na čalúnenie <strong>+ hubica na podlahy a koberce</strong></li>
+						<li>Hubica na čalúnenie v cene</li>
 						<li>2-minútové zaškolenie pri prevzatí</li>
 						<li>Dovoz po BA 10 € / osobný odber zadarmo</li>
 					</ul>
