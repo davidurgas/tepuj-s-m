@@ -111,6 +111,7 @@ get_header();
 	</div>
 	<nav class="mobile-nav" id="mobile-nav" aria-label="Mobilná navigácia">
 		<a href="#ako-to-funguje">Ako to funguje</a>
+		<a href="#galeria">Galéria</a>
 		<a href="#cennik">Cenník</a>
 		<a href="#lokalita">Lokalita</a>
 		<a href="#faq">Časté otázky</a>
@@ -138,19 +139,10 @@ get_header();
 				</div>
 				<p class="hero__trust">Od <strong>30 € / deň</strong> · Kaucia 100 € vrátená ihneď · Bez skrytých poplatkov</p>
 			</div>
-			<div class="hero__visual" aria-hidden="true">
-				<svg viewBox="0 0 420 420" class="hero__illustration" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrácia profesionálneho tepovača">
-					<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2C6FE0"/><stop offset="1" stop-color="#0F52BA"/></linearGradient></defs>
-					<circle cx="210" cy="210" r="200" fill="#EAF1FE"/>
-					<circle cx="210" cy="210" r="150" fill="#DCE9FD"/>
-					<rect x="140" y="150" width="140" height="150" rx="22" fill="url(#g1)"/>
-					<rect x="160" y="176" width="100" height="60" rx="12" fill="#fff" opacity="0.92"/>
-					<circle cx="210" cy="206" r="20" fill="#FF5A36"/><circle cx="210" cy="206" r="9" fill="#fff"/>
-					<rect x="168" y="256" width="84" height="14" rx="7" fill="#0B3E8C"/>
-					<path d="M280 200c60 0 70 40 70 90" stroke="#0B3E8C" stroke-width="12" fill="none" stroke-linecap="round"/>
-					<rect x="336" y="286" width="26" height="60" rx="10" fill="#FF5A36"/>
-					<circle cx="110" cy="120" r="10" fill="#2C6FE0"/><circle cx="330" cy="120" r="7" fill="#FF5A36"/><circle cx="96" cy="300" r="8" fill="#2C6FE0"/>
-				</svg>
+			<div class="hero__visual">
+				<div class="hero__photo-wrap">
+					<img class="hero__photo" src="<?php echo esc_url( $pt_uri . '/img/photo-machine.webp' ); ?>" width="896" height="1120" fetchpriority="high" decoding="async" alt="Profesionálny tepovač na prenájom v Bratislave">
+				</div>
 				<div class="hero__badge">
 					<span class="hero__badge-num">4.9</span>
 					<span class="hero__badge-stars">★★★★★</span>
@@ -185,6 +177,35 @@ get_header();
 				<li class="step"><span class="step__num">2</span><h3 class="step__title">Prevezmi stroj</h3><p>Pri prevzatí zložíš vratnú zálohu 100 € a absolvuješ 2-minútové predvedenie – ukážeme ti všetko potrebné.</p></li>
 				<li class="step"><span class="step__num">3</span><h3 class="step__title">Vytepuj a vráť stroj</h3><p>Vytepuj svoj interiér a po odovzdaní funkčného stroja dostaneš zálohu 100 € ihneď späť.</p></li>
 			</ol>
+		</div>
+	</section>
+
+	<!-- GALLERY / PROOF -->
+	<section class="section" id="galeria">
+		<div class="container">
+			<header class="section__head">
+				<p class="section__eyebrow">Reálne výsledky</p>
+				<h2 class="section__title">Tepovač v akcii</h2>
+				<p class="section__lead">Sedačky, koberce aj auto – takto vyzerá výsledok, keď si vytepuješ interiér sám.</p>
+			</header>
+			<div class="gallery">
+				<figure class="gallery__item gallery__item--wide">
+					<img loading="lazy" decoding="async" width="1024" height="688" src="<?php echo esc_url( $pt_uri . '/img/photo-sofa.webp' ); ?>" alt="Čistenie sedačky profesionálnym tepovačom">
+					<figcaption>Hĺbkové čistenie sedačky</figcaption>
+				</figure>
+				<figure class="gallery__item">
+					<img loading="lazy" decoding="async" width="1024" height="688" src="<?php echo esc_url( $pt_uri . '/img/photo-stripe.webp' ); ?>" alt="Rozdiel medzi znečistenou a vytepovanou látkou">
+					<figcaption>Vidno rozdiel na prvý ťah</figcaption>
+				</figure>
+				<figure class="gallery__item">
+					<img loading="lazy" decoding="async" width="1024" height="688" src="<?php echo esc_url( $pt_uri . '/img/photo-car.webp' ); ?>" alt="Tepovanie sedadla v aute">
+					<figcaption>Aj interiér auta ako nový</figcaption>
+				</figure>
+				<figure class="gallery__item gallery__item--wide">
+					<img loading="lazy" decoding="async" width="1024" height="688" src="<?php echo esc_url( $pt_uri . '/img/photo-delivery.webp' ); ?>" alt="Dovoz tepovača zákazníkovi v Bratislave">
+					<figcaption>Dovezieme ti ho až k dverám</figcaption>
+				</figure>
+			</div>
 		</div>
 	</section>
 

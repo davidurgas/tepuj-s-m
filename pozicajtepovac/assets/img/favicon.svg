@@ -1,12 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="8" fill="#0F52BA"/>
-  <!-- handle -->
-  <path d="M22 6.6 17 13" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
-  <!-- extraction nozzle head -->
-  <path d="M14 12.6 19.4 12.6 22.8 18.4 10.3 18.4Z" fill="#fff"/>
-  <rect x="11.6" y="16.5" width="10" height="1.9" rx="0.95" fill="#0F52BA"/>
-  <!-- cleaned carpet surface -->
-  <path d="M7.5 24.2c3-1.5 14-1.5 17 0" stroke="#8FC0FF" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-  <!-- water droplet -->
-  <path d="M16.4 19.6c-1 1.4-1.6 2.1-1.6 2.9a1.6 1.6 0 0 0 3.2 0c0-.8-.6-1.5-1.6-2.9Z" fill="#FF5A36"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2C6FE0"/><stop offset="1" stop-color="#0B3E8C"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#C9DCF7"/>
+    </linearGradient>
+    <linearGradient id="drop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FF7A5C"/><stop offset="1" stop-color="#F0431D"/>
+    </linearGradient>
+    <radialGradient id="hl" cx="0.3" cy="0.25" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="1" y="1" width="38" height="38" rx="11" fill="url(#body)"/>
+  <rect x="1" y="1" width="38" height="38" rx="11" fill="url(#hl)"/>
+  <rect x="1.6" y="1.6" width="36.8" height="36.8" rx="10.4" fill="none" stroke="#ffffff" stroke-opacity="0.14" stroke-width="1.2"/>
+  <path d="M9 30.5c4-2 18-2 22 0" stroke="#7FB2FF" stroke-width="2.6" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <path d="M28.5 8.5 21 16.5" stroke="url(#steel)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M17.6 15.8 24.8 15.8 29 23.4 12.6 23.4Z" fill="url(#steel)"/>
+  <rect x="14.6" y="21" width="12.8" height="2.4" rx="1.2" fill="#0B3E8C"/>
+  <rect x="16.2" y="21.4" width="9.6" height="1.1" rx="0.55" fill="#FF5A36"/>
+  <path d="M20.8 24.6c-1.5 2-2.4 3.1-2.4 4.3a2.4 2.4 0 0 0 4.8 0c0-1.2-.9-2.3-2.4-4.3Z" fill="url(#drop)"/>
+  <circle cx="20.1" cy="27.6" r="0.7" fill="#fff" opacity="0.85"/>
+  <path d="M30 12.5l.55 1.55 1.55.55-1.55.55-.55 1.55-.55-1.55-1.55-.55 1.55-.55Z" fill="#fff" opacity="0.9"/>
 </svg>

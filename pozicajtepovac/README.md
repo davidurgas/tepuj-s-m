@@ -18,9 +18,11 @@ pozicajtepovac/
 │   ├── css/style.css           # Kompletné štýly (design tokens, mobile-first, Grid/Flexbox)
 │   ├── js/script.js            # Sticky header, mobilné menu, FAQ accordion, smooth scroll
 │   └── img/
-│       ├── favicon.svg         # Logo / favicon
+│       ├── favicon.svg         # Logo / favicon (prepracovaný emblém s gradientom)
 │       ├── og-image.svg        # Zdroj OpenGraph obrázka (editovateľný)
-│       └── og-image.jpg        # Vyrenderovaný OG obrázok 1200×630 (pre sociálne siete)
+│       ├── og-image.jpg        # Vyrenderovaný OG obrázok 1200×630 (pre sociálne siete)
+│       ├── download-photos.sh  # Stiahne AI placeholder fotky (photo-*.webp) do tohto priečinka
+│       └── photo-*.webp        # Fotky do galérie/hera (stiahni skriptom alebo nahraď vlastnými)
 ├── wordpress/
 │   ├── page-pozicajtepovac.php # WordPress page template (rovnaký obsah ako index.html)
 │   └── functions-snippet.php   # Voliteľné optimalizácie do functions.php
@@ -55,12 +57,18 @@ Písmo: **Plus Jakarta Sans** (nadpisy) + **Inter** (text) z Google Fonts
 
 - **Mobile-first CSS** — základné štýly pre mobil, `@media (min-width: …)` pre väčšie obrazovky.
 - **Ovládanie jednou rukou** — sticky spodná CTA lišta na mobile, veľké dotykové ciele (44px+).
-- **Žiadne raster „content" obrázky** — všetky ikony a hero vizuál sú **inline SVG**
-  (ostré na retine, nulové HTTP requesty, minimálna veľkosť). Preto nie je čo lazy-loadovať
-  ani konvertovať do WebP v obsahu — čo je pre PageSpeed ešte lepšie ako WebP + lazy load.
-  Jediný raster je **OG obrázok** (`og-image.jpg`), ktorý sa nenačítava návštevníkom
-  (číta ho len scraper sociálnej siete). Ak neskôr pridáš fotky do galérie, ukladaj ich
-  ako **WebP** a nechaj WordPress natívne `loading="lazy"` (poistka je vo `functions-snippet.php`).
+- **Ikony a logo sú inline SVG** (ostré na retine, nulové HTTP requesty). Logo je
+  prepracovaný emblém s gradientom (hubica tepovača + kvapka), zdroj v `assets/img/favicon.svg`.
+- **Fotky sú vo formáte WebP** a majú `loading="lazy"` + `width`/`height` (proti CLS).
+  Hero fotka stroja má `fetchpriority="high"` (je nad ohybom).
+- **Galéria** (sekcia „Tepovač v akcii") a hero fotka sú **AI vygenerované placeholdery**
+  v našich brand farbách (modrý stroj typu Puzzi + coral). Slúžia na dôveryhodnú prezentáciu
+  do spustenia – **pred ostrým štartom ich nahraď reálnymi fotkami vášho stroja a výsledkov.**
+  - `index.html` (náhľad) načítava fotky priamo z CDN → funguje hneď.
+  - `page-pozicajtepovac.php` (WordPress) očakáva **lokálne** súbory `assets/img/photo-*.webp`.
+    Stiahni ich skriptom `bash assets/img/download-photos.sh`, alebo rovno nahraď vlastnými
+    (rovnaké názvy). Fotky ukladaj ako **WebP** (poistka lazy loadingu je vo `functions-snippet.php`).
+- **OG obrázok** (`og-image.jpg`) sa nenačítava návštevníkom (číta ho len scraper sociálnej siete).
 - **JS `defer`** — skript sa načíta neblokujúco.
 - **Preconnect/preload** pre Google Fonts.
 
