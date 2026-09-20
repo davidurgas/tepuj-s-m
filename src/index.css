@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,83 +6,91 @@
 
 @layer base {
   :root {
-    /* ============ DROPLY BRAND ============ */
-    /* Clean paper background, near-black ink for editorial contrast */
-    --background: 200 33% 98%;
-    --foreground: 214 60% 9%;
+    /* ============ REP — tréningový denník ============ */
+    --background: 240 20% 99%;
+    --foreground: 240 24% 12%;
 
-    /* Droply Blue — primary */
-    --primary: 205 90% 44%;
+    /* Energetická fialová – primárna */
+    --primary: 256 88% 60%;
     --primary-foreground: 0 0% 100%;
 
-    /* Aqua — accent (fizz / water) */
-    --accent: 187 92% 46%;
-    --accent-foreground: 213 60% 12%;
-    --accent-glow: 187 95% 58%;
+    --accent: 256 88% 60%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 256 90% 70%;
 
-    /* Eco Mint — sustainability */
-    --eco: 158 64% 42%;
+    /* Zelená – pozitívny trend / progres */
+    --eco: 152 62% 42%;
     --eco-foreground: 0 0% 100%;
 
-    /* Deep navy — secondary surfaces */
-    --secondary: 213 55% 12%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 240 20% 96%;
+    --secondary-foreground: 240 24% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 213 45% 13%;
+    --card-foreground: 240 24% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 213 45% 13%;
+    --popover-foreground: 240 24% 12%;
 
-    --muted: 200 40% 96%;
-    --muted-foreground: 210 16% 42%;
+    --muted: 240 18% 95%;
+    --muted-foreground: 240 8% 46%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 80% 58%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Warm CTA — used sparingly for urgency (loss aversion) */
-    --sunny: 33 96% 54%;
+    /* Jantárová – osobné rekordy */
+    --sunny: 38 96% 52%;
     --sunny-foreground: 30 60% 12%;
 
-    --border: 200 32% 90%;
-    --input: 200 32% 90%;
-    --ring: 205 90% 44%;
+    --border: 240 16% 90%;
+    --input: 240 16% 90%;
+    --ring: 256 88% 60%;
 
     --radius: 1rem;
 
-    /* Gradients */
-    --gradient-water: linear-gradient(150deg, hsl(187 92% 52%) 0%, hsl(205 90% 46%) 55%, hsl(214 84% 40%) 100%);
-    --gradient-hero: radial-gradient(120% 120% at 50% 0%, hsl(205 88% 22%) 0%, hsl(213 70% 12%) 55%, hsl(214 80% 8%) 100%);
-    --gradient-eco: linear-gradient(135deg, hsl(158 64% 46%) 0%, hsl(187 92% 48%) 100%);
-    --gradient-sheen: linear-gradient(120deg, transparent 30%, hsl(0 0% 100% / 0.5) 50%, transparent 70%);
-
-    /* Shadows */
-    --shadow-card: 0 10px 40px -18px hsl(205 60% 25% / 0.28);
-    --shadow-hover: 0 26px 60px -22px hsl(205 80% 35% / 0.45);
-    --shadow-glow: 0 0 0 1px hsl(187 92% 60% / 0.25), 0 18px 50px -18px hsl(187 92% 50% / 0.55);
-
-    --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --shadow-card: 0 8px 30px -16px hsl(256 60% 30% / 0.22);
+    --shadow-hover: 0 22px 50px -20px hsl(256 70% 40% / 0.4);
+    --shadow-glow: 0 6px 20px -6px hsl(256 88% 60% / 0.55);
   }
 
   .dark {
-    --background: 214 60% 7%;
-    --foreground: 200 30% 96%;
-    --card: 214 50% 11%;
-    --card-foreground: 200 30% 96%;
-    --popover: 214 50% 11%;
-    --popover-foreground: 200 30% 96%;
-    --primary: 187 92% 50%;
-    --primary-foreground: 214 60% 8%;
-    --secondary: 214 45% 14%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 214 40% 16%;
-    --muted-foreground: 200 20% 70%;
-    --accent: 187 92% 50%;
-    --accent-foreground: 214 60% 8%;
-    --border: 214 40% 18%;
-    --input: 214 40% 18%;
-    --ring: 187 92% 50%;
+    --background: 240 24% 8%;
+    --foreground: 240 20% 96%;
+
+    --primary: 256 90% 68%;
+    --primary-foreground: 240 30% 10%;
+
+    --accent: 256 90% 68%;
+    --accent-foreground: 240 30% 10%;
+    --accent-glow: 256 92% 74%;
+
+    --eco: 152 60% 48%;
+    --eco-foreground: 240 30% 10%;
+
+    --secondary: 240 20% 16%;
+    --secondary-foreground: 240 20% 96%;
+
+    --card: 240 22% 12%;
+    --card-foreground: 240 20% 96%;
+
+    --popover: 240 22% 12%;
+    --popover-foreground: 240 20% 96%;
+
+    --muted: 240 18% 18%;
+    --muted-foreground: 240 12% 66%;
+
+    --destructive: 0 72% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --sunny: 38 94% 58%;
+    --sunny-foreground: 30 60% 10%;
+
+    --border: 240 16% 22%;
+    --input: 240 16% 22%;
+    --ring: 256 90% 68%;
+
+    --shadow-card: 0 8px 30px -16px hsl(0 0% 0% / 0.5);
+    --shadow-hover: 0 22px 50px -20px hsl(0 0% 0% / 0.6);
+    --shadow-glow: 0 6px 20px -6px hsl(256 90% 68% / 0.5);
   }
 }
 
@@ -98,6 +106,7 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    -webkit-tap-highlight-color: transparent;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -106,216 +115,25 @@
   }
 
   ::selection {
-    background: hsl(187 92% 46% / 0.28);
-  }
-}
-
-/* Zvýraznené slovo v nadpise – rovnaký font, akcentová farba (žiadne miešanie) */
-.font-accent {
-  color: hsl(var(--primary));
-  font-weight: inherit;
-}
-
-@layer components {
-  .container-tight {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-6;
+    background: hsl(var(--primary) / 0.25);
   }
 
-  .bg-water-gradient { background: var(--gradient-water); }
-  .bg-hero-gradient  { background: var(--gradient-hero); }
-  .bg-eco-gradient   { background: var(--gradient-eco); }
-
-  .text-gradient {
-    background: var(--gradient-water);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* skry šípky number inputov (používame vlastné +/−) */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
-
-  .shadow-card  { box-shadow: var(--shadow-card); }
-  .shadow-hover { box-shadow: var(--shadow-hover); }
-  .shadow-glow  { box-shadow: var(--shadow-glow); }
-
-  /* Frosted glass card */
-  .glass {
-    background: hsl(0 0% 100% / 0.7);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid hsl(0 0% 100% / 0.6);
+  input[type="number"] {
+    -moz-appearance: textfield;
   }
-  .glass-dark {
-    background: hsl(214 60% 10% / 0.55);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid hsl(187 92% 60% / 0.18);
-  }
-
-  /* Reveal-on-scroll base state (paired with .is-visible) */
-  .reveal {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
-  }
-
-  /* Editorial kicker – malý mono label so sekciovým číslom */
-  .kicker {
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: hsl(var(--muted-foreground));
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .kicker::before {
-    content: "";
-    width: 1.75rem;
-    height: 1px;
-    background: hsl(var(--primary));
-    display: inline-block;
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .btn-sheen {
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-sheen::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-sheen);
-    transform: translateX(-120%);
-    transition: transform 0.7s ease;
-  }
-  .btn-sheen:hover::after {
-    transform: translateX(120%);
-  }
-}
-
-@layer utilities {
-  .animation-delay-100 { animation-delay: 100ms; }
-  .animation-delay-200 { animation-delay: 200ms; }
-  .animation-delay-300 { animation-delay: 300ms; }
-  .animation-delay-400 { animation-delay: 400ms; }
-  .animation-delay-500 { animation-delay: 500ms; }
-  .animation-delay-700 { animation-delay: 700ms; }
-}
-
-/* ============ EFEKTY ============ */
-.aurora {
-  position: absolute;
-  inset: -20%;
-  z-index: 0;
-  filter: blur(60px);
-  opacity: 0.9;
-  background:
-    radial-gradient(35% 45% at 20% 30%, hsl(187 92% 55% / 0.55), transparent 60%),
-    radial-gradient(40% 40% at 80% 20%, hsl(205 90% 55% / 0.5), transparent 60%),
-    radial-gradient(45% 45% at 65% 80%, hsl(158 64% 50% / 0.4), transparent 60%),
-    radial-gradient(40% 40% at 25% 85%, hsl(214 84% 50% / 0.45), transparent 60%);
-  background-size: 200% 200%;
-  animation: aurora-move 18s ease-in-out infinite alternate;
-}
-@keyframes aurora-move {
-  0%   { background-position: 0% 0%, 100% 0%, 60% 100%, 0% 100%; }
-  100% { background-position: 40% 30%, 60% 20%, 30% 70%, 40% 60%; }
-}
-
-.animate-marquee { animation: marquee 32s linear infinite; }
-.animate-float-slow { animation: floaty 6s ease-in-out infinite; }
-.pause-on-hover:hover .animate-marquee { animation-play-state: paused; }
-
-/* jemné zrno pre menej „digitálny" vzhľad */
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ============ KEYFRAMES ============ */
-@keyframes rise {
-  0%   { transform: translateY(0) scale(1); opacity: 0; }
-  10%  { opacity: 0.9; }
-  100% { transform: translateY(-120px) scale(0.4); opacity: 0; }
-}
-
-@keyframes floaty {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-14px); }
-}
-
-@keyframes wobble {
-  0%, 100% { transform: rotate(-2deg); }
-  50%      { transform: rotate(2deg); }
-}
-
-@keyframes spin-slow {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes water-shine {
-  0%, 100% { opacity: 0.5; transform: translateX(-10%); }
-  50%      { opacity: 0.9; transform: translateX(10%); }
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-@keyframes pop-in {
-  0%   { opacity: 0; transform: scale(0.85); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-/* Range slider (kalkulačka) */
-.droply-range {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 10px;
-  border-radius: 999px;
-  background: hsl(200 40% 90%);
-  outline: none;
-}
-.droply-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--gradient-water);
-  border: 3px solid #fff;
-  box-shadow: 0 4px 14px hsl(205 80% 40% / 0.5);
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
-.droply-range::-webkit-slider-thumb:hover { transform: scale(1.12); }
-.droply-range::-moz-range-thumb {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: hsl(205 90% 46%);
-  border: 3px solid #fff;
-  box-shadow: 0 4px 14px hsl(205 80% 40% / 0.5);
-  cursor: pointer;
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: hsl(200 40% 96%); }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: hsl(205 90% 55%);
+  background: hsl(var(--muted-foreground) / 0.4);
   border-radius: 6px;
-  border: 2px solid hsl(200 40% 96%);
 }
-::-webkit-scrollbar-thumb:hover { background: hsl(187 92% 46%); }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.6); }
