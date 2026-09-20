@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - main
-      - claude/workout-app-training-plan-2s5zf7
   workflow_dispatch:
 
 permissions:
