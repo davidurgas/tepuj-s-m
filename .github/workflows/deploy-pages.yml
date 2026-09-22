@@ -1,12 +1,11 @@
-name: Deploy Droply demo to GitHub Pages
+name: Deploy Rep to GitHub Pages
 
-# Nasadzuje demo na GitHub Pages. Predpoklad: v Settings → Pages je
+# Nasadzuje appku na GitHub Pages. Predpoklad: v Settings → Pages je
 # Source nastavený na "GitHub Actions".
 on:
   push:
     branches:
       - main
-      - claude/droply-cleaning-tablets-eshop-cd0mxu
   workflow_dispatch:
 
 permissions:

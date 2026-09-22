@@ -1,36 +1,48 @@
-# Droply — demo eshop
+# Rep — tréningový denník
 
-Moderný, interaktívny demo eshop pre značku **Droply** — ekologické šumivé
-čistiace tablety rozpustné vo vode. Menej plastu, menej miesta, žiadne ťahanie
-litrov z obchodu — rovnaká čistota.
+Jednoduchá appka na silový tréning. Vytvoríš si **tréningový plán** s cvikmi
+a opakovaniami, počas tréningu už len **zapisuješ váhy na sériách** a sleduješ
+**progres vo váhach**. Všetko beží v prehliadači (aj na mobile) a dáta sa
+ukladajú priamo v zariadení — netreba účet ani internet.
 
-> ⚠️ Ide o **demo**. Platobná brána nie je aktívna; tlačidlo „Prejsť k pokladni“
-> len simuluje objednávku.
+## Čo appka vie
 
-## Čo eshop obsahuje
+- **Plány** – vytvor si zostavy cvikov (napr. Push / Pull / Nohy), pri každom
+  cviku nastavíš počet sérií a cieľové opakovania. Cviky sa dajú presúvať,
+  mazať a plány duplikovať.
+- **Tréning** – vyberieš plán a už len klopeš váhy a opakovania po sériách.
+  Ťuknutím na ✓ označíš sériu ako hotovú.
+- **Oddychový časovač** – po označení série sa automaticky spustí odpočet
+  medzi sériami (60/90/120/180 s), s tlačidlami ±15 s, pauzou, pípnutím
+  a vibráciou na mobile.
+- **„Minule si dal…"** – pri každom cviku vidíš svoj posledný výkon ako
+  referenciu, aby si vedel, kam pridať.
+- **Živé štatistiky počas tréningu** – objem (váha × opakovania), počet sérií
+  a opakovaní sa počítajú priebežne.
+- **Progres** – grafy pre každý cvik v čase: **odhad maximálky (1RM)**,
+  najťažšia séria a objem, plus percentuálny trend.
+- **Osobné rekordy** – najlepší odhadovaný 1RM pre každý cvik.
+- **História tréningov** s rozkliknutím detailu jednotlivých sérií.
+- **Prehľad** – rýchly štart, séria dní (streak), tréningy za týždeň,
+  celkový nadvihnutý objem.
+- **Záloha / obnova** dát do JSON súboru.
+- **Svetlý aj tmavý režim** podľa nastavenia systému.
 
-- **Hero** so živým vizuálom rozpúšťajúcej sa tablety vo vode.
-- **Scroll efekt „Ako to funguje“** — pri scrollovaní sa tableta postupne
-  rozpúšťa (sticky sekcia riadená pozíciou scrollu).
-- **Výhody** (ekológia, úspora miesta, žiadne nosenie litrov, úspora peňazí…).
-- **Interaktívna kalkulačka úspor** — koľko plastu, hmotnosti a peňazí ušetríš.
-- **Porovnanie** klasické fľaše vs. Droply tablety.
-- **Produkty** s pridávaním do košíka, hodnoteniami a indikátorom skladu.
-- **Cenník / balíčky** s odpočtom uvádzacej ponuky (psychológia predaja:
-  kotvenie cien, vzácnosť, urgentnosť, „najobľúbenejšia voľba“).
-- **Ekologický dopad** s animovanými počítadlami.
-- **Recenzie**, **FAQ**, **newsletter** so zľavovým kódom.
-- **Košík (drawer)** s progresom „doprava zdarma“.
+## Odhad maximálky (1RM)
 
-## Prvky psychológie predaja
+Používa sa Epleyho vzorec: `1RM ≈ váha × (1 + opakovania / 30)`. Je to
+odhad — reálna jednorázová maximálka sa môže líšiť, ale na sledovanie
+progresu je spoľahlivý.
 
-Social proof (recenzie, hodnotenia), kotvenie (prečiarknuté ceny), vzácnosť
-(stav skladu, „posledné kusy“), urgentnosť (odpočet), reciprocita (darček/zľava),
-znižovanie rizika (30 dní na vrátenie, doprava zdarma) a decoy pricing v balíčkoch.
+## Kde sa ukladajú dáta
+
+Lokálne v prehliadači (`localStorage`) daného zariadenia. Neposielajú sa nikam.
+Ak chceš dáta preniesť inam alebo zálohovať, použi **Progres → Nastavenia →
+Zálohovať** (stiahne JSON) a na druhom zariadení **Obnoviť**.
 
 ## Technológie
 
-Vite · React · TypeScript · Tailwind CSS · shadcn/ui · lucide-react
+Vite · React · TypeScript · Tailwind CSS · shadcn/ui · Recharts · lucide-react
 
 ## Spustenie
 
@@ -41,15 +53,19 @@ bun run build    # produkčný build
 bun run preview  # náhľad buildu
 ```
 
-Hlavná stránka: `src/pages/Index.tsx`. Sekcie eshopu: `src/components/droply/`.
-Obsah (produkty, balíčky, recenzie, FAQ): `src/lib/droply-data.ts`.
+Hlavné súbory:
+
+- `src/App.tsx` – routovanie
+- `src/pages/workout/` – obrazovky (Prehľad, Plány, Editor plánu, Tréning, Progres)
+- `src/components/workout/` – layout, oddychový časovač
+- `src/lib/workout/` – dátový model, výpočty (1RM, objem, rekordy), ukladanie
 
 ## 📱 Náhľad na mobile (cez Wi-Fi)
 
-1. Na počítači (potrebuješ nainštalované **Node.js 18+** a **Git**) stiahni projekt:
+1. Na počítači (potrebuješ **Node.js 18+** a **Git**) stiahni projekt:
 
    ```bash
-   git clone -b claude/droply-cleaning-tablets-eshop-cd0mxu https://github.com/davidurgas/tepuj-s-m.git
+   git clone -b claude/workout-app-training-plan-2s5zf7 https://github.com/davidurgas/tepuj-s-m.git
    cd tepuj-s-m
    npm install
    npm run dev -- --host
@@ -62,21 +78,5 @@ Obsah (produkty, balíčky, recenzie, FAQ): `src/lib/droply-data.ts`.
    ➜  Network: http://192.168.0.15:8080/     <-- túto otvor v mobile
    ```
 
-3. Na telefóne (pripojenom na **rovnakú Wi-Fi**) otvor tú **Network** adresu.
-
-> Poznámky: počítač aj telefón musia byť na tej istej sieti. Pri prvom spustení
-> môže Windows/macOS firewall vyžiadať povolenie pre Node.js — povoľ ho.
-> Reálne fotky a video sa načítavajú z internetu, takže telefón musí byť online.
-
-## Poznámka k médiám
-
-Fotografie produktov a video rozpúšťania sú pre demo generované (AI) a načítavajú
-sa z externého CDN — odkazy sú v `src/lib/droply-data.ts`. V ostrej verzii ich
-nahraď vlastnými fotkami/videom (ideálne uloženými v `public/`).
-
-## Nasadenie online (voliteľné)
-
-Repozitár obsahuje workflow `.github/workflows/deploy-pages.yml` pre GitHub Pages.
-Spustí sa iba manuálne. Najprv v **Settings → Pages** nastav *Source: „GitHub
-Actions"* (súkromný repo vyžaduje GitHub Pro), potom **Actions → Deploy Droply
-demo → Run workflow**. Web bude na `https://davidurgas.github.io/tepuj-s-m/`.
+3. Na telefóne (na **rovnakej Wi-Fi**) otvor tú **Network** adresu. Appku si
+   môžeš cez „Pridať na plochu" uložiť ako ikonu a spúšťať na celú obrazovku.

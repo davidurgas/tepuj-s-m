@@ -69,10 +69,13 @@ export default {
         "2xl": "1.75rem",
         "3xl": "2.25rem",
       },
+      spacing: {
+        "4.5": "1.125rem",
+      },
       boxShadow: {
-        card: "0 10px 40px -18px hsl(205 60% 25% / 0.28)",
-        hover: "0 26px 60px -22px hsl(205 80% 35% / 0.45)",
-        glow: "0 0 0 1px hsl(187 92% 60% / 0.25), 0 18px 50px -18px hsl(187 92% 50% / 0.55)",
+        card: "var(--shadow-card)",
+        hover: "var(--shadow-hover)",
+        glow: "var(--shadow-glow)",
       },
       keyframes: {
         "accordion-down": {
