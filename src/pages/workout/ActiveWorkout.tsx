@@ -368,6 +368,39 @@ function SetRow({
 }) {
   const placeholderW = prev?.weight != null ? String(prev.weight) : "–";
   const placeholderR = prev?.reps != null ? String(prev.reps) : String("");
+
+  // Lokálny text poľa – umožňuje písať desatinné čísla (27,5 aj 27.5)
+  // bez toho, aby model zahodil rozpísaný oddeľovač.
+  const [wStr, setWStr] = useState(set.weight?.toString() ?? "");
+  const [rStr, setRStr] = useState(set.reps?.toString() ?? "");
+  const [wFocus, setWFocus] = useState(false);
+  const [rFocus, setRFocus] = useState(false);
+
+  // Kým pole needituješ, drž ho v súlade s modelom (napr. po vyčistení série).
+  useEffect(() => {
+    if (!wFocus) setWStr(set.weight?.toString() ?? "");
+  }, [set.weight, wFocus]);
+  useEffect(() => {
+    if (!rFocus) setRStr(set.reps?.toString() ?? "");
+  }, [set.reps, rFocus]);
+
+  const handleWeight = (raw: string) => {
+    // povoľ len číslice a jeden desatinný oddeľovač (, alebo .)
+    let cleaned = raw.replace(/[^0-9.,]/g, "");
+    const firstSep = cleaned.search(/[.,]/);
+    if (firstSep !== -1) {
+      cleaned =
+        cleaned.slice(0, firstSep + 1) + cleaned.slice(firstSep + 1).replace(/[.,]/g, "");
+    }
+    setWStr(cleaned);
+    onWeight(cleaned);
+  };
+  const handleReps = (raw: string) => {
+    const cleaned = raw.replace(/[^0-9]/g, "");
+    setRStr(cleaned);
+    onReps(cleaned);
+  };
+
   return (
     <div
       className={`grid grid-cols-[1.5rem_1fr_1fr_2.25rem] items-center gap-2 rounded-xl px-1 py-1 transition ${
@@ -383,16 +416,20 @@ function SetRow({
       </span>
       <input
         inputMode="decimal"
-        value={set.weight ?? ""}
-        onChange={(e) => onWeight(e.target.value)}
+        value={wStr}
+        onChange={(e) => handleWeight(e.target.value)}
+        onFocus={() => setWFocus(true)}
+        onBlur={() => setWFocus(false)}
         placeholder={placeholderW}
         aria-label={`Séria ${index + 1} váha`}
         className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-center text-base font-bold outline-none transition focus:border-primary"
       />
       <input
         inputMode="numeric"
-        value={set.reps ?? ""}
-        onChange={(e) => onReps(e.target.value)}
+        value={rStr}
+        onChange={(e) => handleReps(e.target.value)}
+        onFocus={() => setRFocus(true)}
+        onBlur={() => setRFocus(false)}
         placeholder={placeholderR || "0"}
         aria-label={`Séria ${index + 1} opakovania`}
         className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-center text-base font-bold outline-none transition focus:border-primary"
