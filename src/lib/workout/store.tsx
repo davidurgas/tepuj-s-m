@@ -39,6 +39,7 @@ function sessionFromPlan(plan: Plan): Session {
       exerciseId: ex.id,
       name: ex.name,
       targetReps: ex.targetReps,
+      targetRepsMax: ex.targetRepsMax,
       sets: Array.from({ length: Math.max(1, ex.sets) }, () => emptySet()),
     })),
   };

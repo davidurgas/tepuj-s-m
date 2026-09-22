@@ -50,6 +50,12 @@ export function fmtDuration(ms: number): string {
   return m ? `${h} h ${m} min` : `${h} h`;
 }
 
+/** Cieľové opakovania: „8" alebo rozsah „6–8". */
+export function fmtRepRange(low: number, high?: number): string {
+  if (high != null && high > low) return `${low}–${high}`;
+  return `${low}`;
+}
+
 export function fmtClock(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
