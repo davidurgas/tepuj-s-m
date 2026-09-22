@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useStore, emptySet } from "@/lib/workout/store";
 import { useRestTimer } from "@/components/workout/RestTimer";
 import { bestSet, exerciseVolume, lastPerformance, sessionReps, sessionSetCount, sessionVolume, uid } from "@/lib/workout/calc";
-import { fmtDuration, fmtWeight } from "@/lib/workout/format";
+import { fmtDuration, fmtRepRange, fmtWeight } from "@/lib/workout/format";
 import type { LoggedSet, Session, SessionExercise } from "@/lib/workout/types";
 import {
   AlertDialog,
@@ -286,7 +286,9 @@ function ExerciseCard({
     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
       <div className="flex items-center justify-between gap-2 px-4 pb-2 pt-3">
         <h3 className="min-w-0 truncate font-bold">{ex.name}</h3>
-        <span className="shrink-0 text-xs font-semibold text-muted-foreground">cieľ {ex.targetReps} opak.</span>
+        <span className="shrink-0 text-xs font-semibold text-muted-foreground">
+          cieľ {fmtRepRange(ex.targetReps, ex.targetRepsMax)} opak.
+        </span>
       </div>
 
       {prevBest && (

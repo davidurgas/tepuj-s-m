@@ -8,8 +8,10 @@ export interface PlanExercise {
   name: string;
   /** Plánovaný počet sérií. */
   sets: number;
-  /** Cieľový počet opakovaní na sériu. */
+  /** Cieľový počet opakovaní na sériu (dolná hranica rozsahu). */
   targetReps: number;
+  /** Horná hranica rozsahu opakovaní (napr. 6–8). Ak chýba, ide o jedno číslo. */
+  targetRepsMax?: number;
   /** Voliteľný oddych medzi sériami (s) – prepíše globálne nastavenie. */
   restSeconds?: number;
   note?: string;
@@ -36,6 +38,7 @@ export interface SessionExercise {
   exerciseId: string;
   name: string;
   targetReps: number;
+  targetRepsMax?: number;
   sets: LoggedSet[];
 }
 

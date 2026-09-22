@@ -128,21 +128,63 @@ export default function PlanEditor() {
               </button>
             </div>
 
-            <div className="mt-2 grid grid-cols-2 gap-2 pl-7">
-              <NumField
-                label="Série"
-                value={ex.sets}
-                min={1}
-                max={12}
-                onChange={(v) => setExercise(ex.id, { sets: v })}
-              />
-              <NumField
+            <div className="mt-2.5 space-y-2">
+              <ControlBlock label="Série">
+                <Stepper
+                  value={ex.sets}
+                  min={1}
+                  max={20}
+                  onChange={(v) => setExercise(ex.id, { sets: v })}
+                />
+              </ControlBlock>
+
+              <ControlBlock
                 label="Opakovania"
-                value={ex.targetReps}
-                min={1}
-                max={100}
-                onChange={(v) => setExercise(ex.id, { targetReps: v })}
-              />
+                action={
+                  ex.targetRepsMax == null ? (
+                    <button
+                      onClick={() =>
+                        setExercise(ex.id, { targetRepsMax: Math.min(100, ex.targetReps + 2) })
+                      }
+                      className="text-xs font-bold text-primary transition hover:opacity-80"
+                    >
+                      + rozsah
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setExercise(ex.id, { targetRepsMax: undefined })}
+                      className="text-xs font-semibold text-muted-foreground transition hover:text-foreground"
+                    >
+                      zrušiť rozsah
+                    </button>
+                  )
+                }
+              >
+                <Stepper
+                  value={ex.targetReps}
+                  min={1}
+                  max={100}
+                  onChange={(v) =>
+                    setExercise(ex.id, {
+                      targetReps: v,
+                      // udrž hornú hranicu ≥ dolnej
+                      targetRepsMax:
+                        ex.targetRepsMax != null && ex.targetRepsMax < v ? v : ex.targetRepsMax,
+                    })
+                  }
+                />
+                {ex.targetRepsMax != null && (
+                  <>
+                    <span className="px-0.5 text-sm font-bold text-muted-foreground">–</span>
+                    <Stepper
+                      value={ex.targetRepsMax}
+                      min={ex.targetReps}
+                      max={100}
+                      onChange={(v) => setExercise(ex.id, { targetRepsMax: v })}
+                    />
+                  </>
+                )}
+              </ControlBlock>
             </div>
           </div>
         ))}
@@ -171,42 +213,73 @@ function BackBtn({ onClick }: { onClick: () => void }) {
   );
 }
 
-function NumField({
+/** Blok ovládača: názov (+ voliteľná akcia vpravo) a pod ním samotné ovládanie. */
+function ControlBlock({
   label,
+  action,
+  children,
+}: {
+  label: string;
+  action?: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-xl bg-muted/40 px-3 py-2.5">
+      <div className="flex items-center justify-between">
+        <span className="text-xs font-semibold text-muted-foreground">{label}</span>
+        {action}
+      </div>
+      <div className="mt-2 flex items-center gap-2">{children}</div>
+    </div>
+  );
+}
+
+/** Kompaktný stepper: [−] hodnota [+]. */
+function Stepper({
   value,
   min,
   max,
   onChange,
 }: {
-  label: string;
   value: number;
   min: number;
   max: number;
   onChange: (v: number) => void;
 }) {
-  const clamp = (v: number) => Math.max(min, Math.min(max, v));
+  const clamp = (v: number) => Math.max(min, Math.min(max, Number.isNaN(v) ? min : v));
   return (
-    <div className="flex items-center justify-between rounded-lg bg-muted/40 px-2 py-1.5">
-      <span className="pl-1 text-xs font-medium text-muted-foreground">{label}</span>
-      <div className="flex items-center gap-1">
-        <StepBtn onClick={() => onChange(clamp(value - 1))}>−</StepBtn>
-        <input
-          type="number"
-          value={value}
-          onChange={(e) => onChange(clamp(parseInt(e.target.value || "0", 10)))}
-          className="w-10 bg-transparent text-center text-sm font-bold outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
-        />
-        <StepBtn onClick={() => onChange(clamp(value + 1))}>+</StepBtn>
-      </div>
+    <div className="flex items-center gap-1.5">
+      <StepBtn label="Znížiť" onClick={() => onChange(clamp(value - 1))}>
+        −
+      </StepBtn>
+      <input
+        type="number"
+        inputMode="numeric"
+        value={value}
+        onChange={(e) => onChange(clamp(parseInt(e.target.value || "0", 10)))}
+        className="w-11 rounded-lg bg-background py-1.5 text-center text-base font-bold outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+      />
+      <StepBtn label="Zvýšiť" onClick={() => onChange(clamp(value + 1))}>
+        +
+      </StepBtn>
     </div>
   );
 }
 
-function StepBtn({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
+function StepBtn({
+  children,
+  onClick,
+  label,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  label: string;
+}) {
   return (
     <button
       onClick={onClick}
-      className="grid h-7 w-7 place-items-center rounded-md bg-background text-base font-bold text-foreground shadow-sm transition hover:bg-primary hover:text-primary-foreground"
+      aria-label={label}
+      className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-background text-lg font-bold text-foreground shadow-sm transition active:scale-95 hover:bg-primary hover:text-primary-foreground"
     >
       {children}
     </button>
