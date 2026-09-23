@@ -284,9 +284,9 @@ function ExerciseCard({
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
-      <div className="flex items-center justify-between gap-2 px-4 pb-2 pt-3">
-        <h3 className="min-w-0 truncate font-bold">{ex.name}</h3>
-        <span className="shrink-0 text-xs font-semibold text-muted-foreground">
+      <div className="flex items-start justify-between gap-2 px-4 pb-2 pt-3">
+        <h3 className="min-w-0 flex-1 font-bold leading-snug [overflow-wrap:anywhere]">{ex.name}</h3>
+        <span className="mt-0.5 shrink-0 text-xs font-semibold text-muted-foreground">
           cieľ {fmtRepRange(ex.targetReps, ex.targetRepsMax)} opak.
         </span>
       </div>
