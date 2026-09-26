@@ -87,3 +87,11 @@ test('stratený jeden < medzi priezviskom a menom', () => {
   assert.equal(m.surname, 'KOVAC');
   assert.equal(m.givenNames, 'ZAN');
 });
+
+test('zlúčené priezvisko a meno a šum z výplne', () => {
+  const [l1, l2] = slovakMrz();
+  assert.equal(parseTd1([l1, l2, 'KOVAC<JAN<<<<<<<<<<<<<<<<<K<<']).givenNames, 'JAN');
+  const m = parseTd1([l1, l2, 'KOVAC<JAN<<<<<<<<<<<<<<<<<<<<<']);
+  assert.equal(m.surname, 'KOVAC');
+  assert.equal(m.givenNames, 'JAN');
+});

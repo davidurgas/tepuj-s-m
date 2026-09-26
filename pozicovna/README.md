@@ -32,6 +32,18 @@ Fotky OP, podpisy aj PDF dokumenty zostávajú uložené pri každom požičaní
 (pre prípad sporu). Zoznam ukazuje, čo je požičané, čo je po termíne a čo
 už je vrátené; dá sa v ňom hľadať podľa mena, telefónu či čísla zmluvy.
 
+## Demo bez servera
+
+`node scripts/build-demo.mjs` zostaví do `dist-demo/` verziu s ukážkovými
+dátami, ktorá beží celá v prehliadači (nič sa neukladá ani neodosiela).
+
+## Rýchlosť
+
+- OCR sa načíta hneď pri otvorení sprievodcu, kým fotíš; čítanie OP potom
+  trvá 1–3 sekundy a strojový kód aj text sa čítajú naraz.
+- Fotky sa pred nahratím zmenšia, server posiela súbory komprimované
+  a appka sa cez service worker otvára z cache (aj pri slabom signáli).
+
 ## Prvé spustenie
 
 Potrebuješ **Node.js 22.13+**.

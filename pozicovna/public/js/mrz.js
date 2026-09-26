@@ -118,7 +118,12 @@ export function parseTd1(rawLines) {
     if (!t) break;
     givenTokens.push(t);
   }
-  const clean = (s) => alphas(s).replace(/[^A-Z ]/g, '').trim();
+  const clean = (s) => alphas(s).replace(/[^A-Z ]/g, '').replace(/\s+/g, ' ').trim();
+  let surname = clean(surnamePart.replace(/</g, ' '));
+  // Výplň „<“ prečítaná ako K/C/L vytvorí jednopísmenové „mená“ – tie zahodíme.
+  let givenNames = clean(givenTokens.filter((t) => t.length > 1).join(' '));
+  // Ak OCR zlial priezvisko s menom (KOVAC JAN, meno prázdne), rozdelíme ich.
+  if (!givenNames && surname.includes(' ')) [surname, givenNames] = [surname.slice(0, surname.indexOf(' ')), surname.slice(surname.indexOf(' ') + 1)];
 
   const checks = {
     docNumber: doc.ok,
@@ -135,8 +140,8 @@ export function parseTd1(rawLines) {
     sex: sexChar === 'M' ? 'M' : sexChar === 'F' ? 'F' : '',
     expiryDate: yymmdd(expiryRaw, { future: true }),
     nationality,
-    surname: clean(surnamePart.replace(/</g, ' ')),
-    givenNames: clean(givenTokens.join(' ')),
+    surname,
+    givenNames,
     checks,
     valid: checks.docNumber && checks.birthDate && checks.expiryDate,
   };

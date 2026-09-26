@@ -4,10 +4,12 @@
 
 import { parseMrzFromText, restoreDiacritics, findBirthNumber, findAddress } from './mrz.js';
 
+// Absolútne adresy – worker ich rieši voči vlastnej adrese, nie voči stránke.
+const abs = (p) => new URL(p, document.baseURI).href.replace(/\/$/, '');
 const OPTS = {
-  workerPath: '/vendor/tesseract/worker.min.js',
-  corePath: '/vendor/tesseract-core',
-  langPath: '/vendor/tessdata',
+  workerPath: abs('vendor/tesseract/worker.min.js'),
+  corePath: abs('vendor/tesseract-core/'),
+  langPath: abs('vendor/tessdata/'),
 };
 
 let libPromise;
@@ -15,7 +17,7 @@ function loadLib() {
   if (window.Tesseract) return Promise.resolve(window.Tesseract);
   libPromise ||= new Promise((resolve, reject) => {
     const s = document.createElement('script');
-    s.src = '/vendor/tesseract/tesseract.min.js';
+    s.src = abs('vendor/tesseract/tesseract.min.js');
     s.onload = () => resolve(window.Tesseract);
     s.onerror = () => reject(new Error('Nepodarilo sa načítať OCR knižnicu.'));
     document.head.appendChild(s);
@@ -24,10 +26,24 @@ function loadLib() {
 }
 
 const workers = {};
-async function worker(lang) {
-  const T = await loadLib();
-  workers[lang] ||= T.createWorker(lang, 1, OPTS);
+function worker(lang) {
+  workers[lang] ||= loadLib().then(async (T) => {
+    const w = await T.createWorker(lang, 1, OPTS);
+    if (lang === 'eng') {
+      await w.setParameters({
+        tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<',
+        tessedit_pageseg_mode: '6',
+      });
+    }
+    return w;
+  });
   return workers[lang];
+}
+
+// Načíta OCR a jazykové dáta vopred (kým sa fotí), aby čítanie potom trvalo len chvíľu.
+export function warmUpOcr() {
+  worker('eng').catch(() => {});
+  worker('slk').catch(() => {});
 }
 
 // Predspracovanie: odtiene sivej, zväčšenie malých fotiek, natiahnutie kontrastu.
@@ -66,10 +82,6 @@ async function prepare(blob, { crop } = {}) {
 
 async function readMrz(back) {
   const w = await worker('eng');
-  await w.setParameters({
-    tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<',
-    tessedit_pageseg_mode: '6',
-  });
   // Najprv spodná časť karty (MRZ je dole), potom celá fotka.
   let best = null;
   for (const crop of [0.45, 0]) {
@@ -95,16 +107,16 @@ async function readText(blob) {
  */
 export async function scanIdCard(front, back, onProgress = () => {}) {
   const warnings = [];
-  onProgress('Načítavam OCR…');
+  onProgress('Pripravujem čítanie…');
   await loadLib();
 
-  onProgress('Čítam strojový kód na zadnej strane…');
-  const mrz = back ? await readMrz(back).catch(() => null) : null;
-
-  onProgress('Čítam text na prednej strane…');
-  const frontText = front ? await readText(front).catch(() => '') : '';
-  onProgress('Čítam adresu na zadnej strane…');
-  const backText = back ? await readText(back).catch(() => '') : '';
+  onProgress('Čítam údaje z OP…');
+  // MRZ (angličtina) a bežný text (slovenčina) bežia v dvoch workeroch naraz.
+  const [mrz, frontText, backText] = await Promise.all([
+    back ? readMrz(back).catch(() => null) : null,
+    front ? readText(front).catch(() => '') : '',
+    back ? readText(back).catch(() => '') : '',
+  ]);
 
   const fields = {};
   if (mrz) {

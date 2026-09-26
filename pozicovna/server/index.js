@@ -1,4 +1,5 @@
 import express from 'express';
+import compression from 'compression';
 import multer from 'multer';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -33,6 +34,7 @@ const SECRET = process.env.SESSION_SECRET || (() => {
 const app = express();
 app.set('trust proxy', 1);
 app.disable('x-powered-by');
+app.use(compression());
 app.use(express.json({ limit: '5mb' }));
 app.use((req, res, next) => {
   res.set('X-Content-Type-Options', 'nosniff');
