@@ -80,3 +80,11 @@ Hlavné súbory:
 
 3. Na telefóne (na **rovnakej Wi-Fi**) otvor tú **Network** adresu. Appku si
    môžeš cez „Pridať na plochu" uložiť ako ikonu a spúšťať na celú obrazovku.
+
+---
+
+# Požičovňa tepovačov (priečinok `pozicovna/`)
+
+Samostatná appka s vlastným serverom na administráciu požičovne tepovacích
+strojov – sken OP, zmluva podpísaná prstom, záloha, emaily zákazníkovi.
+Návod na spustenie a nasadenie: [`pozicovna/README.md`](pozicovna/README.md).
