@@ -165,6 +165,21 @@ button { font: inherit; cursor: pointer; }
 }
 .hero__photo { width: 100%; height: auto; display: block; }
 
+/* Mascot Tepko */
+.hero__mascot { position: relative; display: flex; justify-content: center; width: 100%; }
+.tepko { width: min(300px, 78%); height: auto; animation: tepko-float 4.5s ease-in-out infinite; }
+@keyframes tepko-float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
+.speech {
+  position: absolute; top: 6%; left: 4%; z-index: 2;
+  background: var(--c-white); color: var(--c-ink);
+  font-family: var(--f-head); font-weight: 700; font-size: .92rem;
+  padding: 10px 16px; border-radius: 16px 16px 16px 4px; box-shadow: var(--sh-md);
+}
+.speech::after {
+  content: ""; position: absolute; left: 14px; bottom: -8px;
+  border: 8px solid transparent; border-top-color: var(--c-white); border-bottom: 0;
+}
+
 /* Photo placeholder (sem používateľ vloží vlastné fotky) */
 .photo-slot {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
