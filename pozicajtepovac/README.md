@@ -50,13 +50,13 @@ Všetko je riadené CSS premennými v `assets/css/style.css` (`:root`):
 Písmo: **Plus Jakarta Sans** (nadpisy) + **Inter** (text) z Google Fonts
 (`display=swap`). Zmenu farieb/fontu urobíš na jednom mieste v `:root`.
 
-### Maskot „Tepko" 🫧
+### Maskot „Kvapko" 🫧
 
-Brand má vlastnú postavičku – **Tepka**, priateľský tepovač v našich farbách
+Brand má vlastnú postavičku – **Kvapka**, priateľský tepovač v našich farbách
 (ručne kreslené inline SVG, žiadne obrázky navyše). Je v hero sekcii so speech
 bublinou a spomínaný v textoch (kroky, footer, CTA). Tón je **vyvážene hravý** –
 osobnosť navrchu, ale ceny, kaucia a proces zostávajú jasné a dôveryhodné.
-Meno „Tepko" vieš kedykoľvek zmeniť (nájdi/nahraď v `index.html` a `page-pozicajtepovac.php`).
+Meno „Kvapko" vieš kedykoľvek zmeniť (nájdi/nahraď v `index.html` a `page-pozicajtepovac.php`).
 
 ---
 

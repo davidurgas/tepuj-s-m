@@ -165,10 +165,10 @@ button { font: inherit; cursor: pointer; }
 }
 .hero__photo { width: 100%; height: auto; display: block; }
 
-/* Mascot Tepko */
+/* Mascot Kvapko */
 .hero__mascot { position: relative; display: flex; justify-content: center; width: 100%; }
-.tepko { width: min(300px, 78%); height: auto; animation: tepko-float 4.5s ease-in-out infinite; }
-@keyframes tepko-float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
+.mascot { width: min(300px, 78%); height: auto; animation: mascot-float 4.5s ease-in-out infinite; }
+@keyframes mascot-float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
 .speech {
   position: absolute; top: 6%; left: 4%; z-index: 2;
   background: var(--c-white); color: var(--c-ink);

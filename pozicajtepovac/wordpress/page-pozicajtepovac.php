@@ -127,7 +127,7 @@ get_header();
 			<div class="hero__content">
 				<p class="hero__eyebrow">📍 Rozvoz po celej Bratislave</p>
 				<h1 class="hero__title">Požičaj si profesionálny tepovač v Bratislave</h1>
-				<p class="hero__subtitle">Vyčisti si sedačku, auto či koberec sám – za zlomok ceny tepovacej firmy. Tepka ti dovezieme až k dverám a za 2 minúty ukážeme, ako na to.</p>
+				<p class="hero__subtitle">Vyčisti si sedačku, auto či koberec sám – za zlomok ceny tepovacej firmy. Kvapka ti dovezieme až k dverám a za 2 minúty ukážeme, ako na to.</p>
 				<ul class="hero__benefits">
 					<li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Chémia v cene</li>
 					<li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Inštruktáž za 2 minúty</li>
@@ -141,8 +141,8 @@ get_header();
 			</div>
 			<div class="hero__visual">
 				<div class="hero__mascot">
-					<div class="speech">Ahoj, som Tepko! 👋</div>
-					<svg class="tepko" viewBox="0 0 260 280" role="img" aria-label="Tepko – maskot požičovne tepovačov" xmlns="http://www.w3.org/2000/svg">
+					<div class="speech">Ahoj, som Kvapko! 👋</div>
+					<svg class="mascot" viewBox="0 0 260 280" role="img" aria-label="Kvapko – maskot požičovne tepovačov" xmlns="http://www.w3.org/2000/svg">
 						<defs>
 							<linearGradient id="tb" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#3A7BEA"/><stop offset="1" stop-color="#0F52BA"/></linearGradient>
 							<linearGradient id="tsteel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#BFD4F5"/></linearGradient>
@@ -203,8 +203,8 @@ get_header();
 			</header>
 			<ol class="steps">
 				<li class="step"><span class="step__num">1</span><h3 class="step__title">Zvoľ si termín a odber</h3><p>Online si vyber deň a spôsob odberu – dovoz po Bratislave za 10 € alebo osobný odber zadarmo.</p></li>
-				<li class="step"><span class="step__num">2</span><h3 class="step__title">Prevezmi Tepka</h3><p>Pri prevzatí zložíš vratnú zálohu 100 € a Tepko ti za 2 minúty ukáže, ako na to – zvládne to naozaj každý.</p></li>
-				<li class="step"><span class="step__num">3</span><h3 class="step__title">Vytepuj a vráť Tepka</h3><p>Vytepuj svoj interiér a po vrátení čistého a funkčného Tepka dostaneš zálohu 100 € ihneď späť.</p></li>
+				<li class="step"><span class="step__num">2</span><h3 class="step__title">Prevezmi Kvapka</h3><p>Pri prevzatí zložíš vratnú zálohu 100 € a Kvapko ti za 2 minúty ukáže, ako na to – zvládne to naozaj každý.</p></li>
+				<li class="step"><span class="step__num">3</span><h3 class="step__title">Vytepuj a vráť Kvapka</h3><p>Vytepuj svoj interiér a po vrátení čistého a funkčného Kvapka dostaneš zálohu 100 € ihneď späť.</p></li>
 			</ol>
 		</div>
 	</section>
@@ -369,7 +369,7 @@ get_header();
 	<!-- FINAL CTA -->
 	<section class="cta-band">
 		<div class="container cta-band__inner">
-			<h2 class="cta-band__title">Tepko je pripravený. A ty?</h2>
+			<h2 class="cta-band__title">Kvapko je pripravený. A ty?</h2>
 			<p class="cta-band__text">Rezervuj si ho už dnes – od 30 € na celý deň, chémia v cene.</p>
 			<a href="#rezervacia" class="btn btn--cta btn--lg">Rezervovať online →</a>
 		</div>
@@ -380,7 +380,7 @@ get_header();
 	<div class="container footer__grid">
 		<div class="footer__col">
 			<a href="#hero" class="brand brand--footer"><span class="brand__name">POŽIČAJTEPOVAČ<span class="brand__tld">.sk</span></span></a>
-			<p class="footer__about">Tepko – tvoj kamoš na upratovanie. Požičovňa profesionálnych tepovačov v Bratislave: rýchlo, výhodne a bez starostí.</p>
+			<p class="footer__about">Kvapko – tvoj kamoš na upratovanie. Požičovňa profesionálnych tepovačov v Bratislave: rýchlo, výhodne a bez starostí.</p>
 			<p class="footer__contact"><a href="tel:+421900123456">📞 0900 123 456</a></p>
 			<p class="footer__contact"><a href="mailto:info@pozicajtepovac.sk">✉️ info@pozicajtepovac.sk</a></p>
 		</div>
