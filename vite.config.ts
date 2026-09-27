@@ -12,6 +12,15 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  build: {
+    // dve appky v jednom nasadení: Rep (index.html) a Zákazky (obstaravania.html)
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+        obstaravania: path.resolve(__dirname, "obstaravania.html"),
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

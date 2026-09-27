@@ -1,0 +1,47 @@
+name: Zber zákaziek (tepovanie)
+
+# Každé ráno stiahne nové verejné obstarávania z TED, uloží ich do
+# public/data/tenders.json v main a spustí nasadenie stránky.
+on:
+  schedule:
+    - cron: "17 4 * * *" # 04:17 UTC ≈ 6:17 SK čas
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: fetch-tenders
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Stiahni zákazky
+        run: node scripts/fetch-tenders.ts
+
+      - name: Ulož zmeny a nasaď
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- public/data/tenders.json; then
+            echo "Žiadne zmeny v dátach."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add public/data/tenders.json
+          git commit -m "Aktualizácia zákaziek $(date -u +%Y-%m-%d)"
+          git push origin HEAD:main
+          # push cez GITHUB_TOKEN nespúšťa iné workflowy → nasadenie spustíme ručne
+          gh workflow run deploy-pages.yml --ref main

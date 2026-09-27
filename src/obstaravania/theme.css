@@ -1,0 +1,30 @@
+/* Farby appky Zákazky — svieža tyrkysová („čistota") namiesto fialovej z Rep. */
+:root {
+  --primary: 186 84% 34%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 186 84% 34%;
+  --ring: 186 84% 34%;
+  --background: 190 30% 98.5%;
+  --secondary: 190 22% 94%;
+  --muted: 190 18% 94%;
+  --border: 190 16% 88%;
+  --input: 190 16% 88%;
+  --shadow-card: 0 8px 30px -16px hsl(190 60% 20% / 0.22);
+  --shadow-hover: 0 22px 50px -20px hsl(190 70% 25% / 0.35);
+  --shadow-glow: 0 6px 20px -6px hsl(186 84% 34% / 0.5);
+}
+
+.dark {
+  --primary: 184 70% 52%;
+  --primary-foreground: 190 40% 8%;
+  --accent: 184 70% 52%;
+  --ring: 184 70% 52%;
+  --background: 195 28% 7%;
+  --card: 195 24% 11%;
+  --popover: 195 24% 11%;
+  --secondary: 195 20% 16%;
+  --muted: 195 18% 17%;
+  --border: 195 16% 20%;
+  --input: 195 16% 20%;
+  --shadow-glow: 0 6px 20px -6px hsl(184 70% 52% / 0.45);
+}

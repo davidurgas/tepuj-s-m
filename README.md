@@ -80,3 +80,46 @@ Hlavné súbory:
 
 3. Na telefóne (na **rovnakej Wi-Fi**) otvor tú **Network** adresu. Appku si
    môžeš cez „Pridať na plochu" uložiť ako ikonu a spúšťať na celú obrazovku.
+
+---
+
+# Zákazky — tepovanie vo verejnom obstarávaní
+
+Druhá appka v tomto repozitári (`obstaravania.html`, po nasadení
+`https://<user>.github.io/tepuj-s-m/obstaravania.html`). Zhromažďuje verejné
+obstarávania na Slovensku, v ktorých sa môže firma uchádzať o **tepovanie**
+(koberce, čalúnenie, sedačky, textilné podlahy…), a pomáha sledovať ponuky.
+
+## Čo vie
+
+- **Zákazky** – otvorené výzvy zoradené podľa termínu na predloženie ponúk
+  (červená = končí do 3 dní), výsledky (kto vyhral a za koľko), fulltext.
+  Delenie na *Tepovanie* a širšie *Upratovanie / čistenie* (veľké upratovacie
+  zákazky často obsahujú aj tepovanie). Nové zákazky od poslednej návštevy
+  sú označené „Nové".
+- **Moje ponuky** – stav každej zákazky (Zaujíma nás → Pripravujeme ponuku →
+  Podaná → Vyhrali / Nevyšlo), poznámky, termín do kalendára (.ics s
+  pripomienkou 3 dni vopred).
+- **Zdroje** – odkazy na ÚVO, EKS, Josephine; ručné pridanie zákazky nájdenej
+  inde; export do Excelu (CSV); záloha poznámok.
+
+## Odkiaľ sú dáta
+
+Workflow `.github/workflows/fetch-tenders.yml` každé ráno spustí
+`scripts/fetch-tenders.ts`, ktorý cez verejné
+[TED Search API](https://docs.ted.europa.eu/api/latest/search.html) (bez
+registrácie) stiahne oznámenia slovenských obstarávateľov:
+
+- podľa CPV kódov upratovania a čistenia textílií (90910000, 90911200,
+  98312000, …),
+- podľa fulltextu (tepovanie, koberce, čalúnenie, sedačky…).
+
+Výsledok uloží do `public/data/tenders.json`, commitne do `main` a spustí
+nasadenie. Logika hľadania a triedenia je v `src/obstaravania/core.ts`.
+
+Ručne: `node scripts/fetch-tenders.ts` (Node 22.18+), alebo v GitHube
+**Actions → Zber zákaziek → Run workflow**.
+
+> TED obsahuje hlavne väčšie zákazky. Menšie (zákazky s nízkou hodnotou)
+> vyhlasujú obstarávatelia v EKS, Josephine alebo vo Vestníku ÚVO — tie
+> nemajú bezplatné verejné API, preto sú v appke ako odkazy + ručné pridanie.
