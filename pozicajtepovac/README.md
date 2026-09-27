@@ -52,9 +52,12 @@ Písmo: **Plus Jakarta Sans** (nadpisy) + **Inter** (text) z Google Fonts
 
 ### Maskot „Kvapko" 🫧
 
-Brand má vlastnú postavičku – **Kvapka**, priateľský tepovač v našich farbách
-(ručne kreslené inline SVG, žiadne obrázky navyše). Je v hero sekcii so speech
-bublinou a spomínaný v textoch (kroky, footer, CTA). Tón je **vyvážene hravý** –
+Brand má vlastnú postavičku – **Kvapko**, priateľský tepovač v našich farbách.
+Používame **3D rendery s priehľadným pozadím** (WebP) – sada póz v `assets/img/`:
+`kvapko-hero.webp` (máva – hero sekcia), `kvapko-thumbsup.webp` (palec hore –
+záverečné CTA), plus `kvapko-wand.webp`, `kvapko-wand2.webp`, `kvapko-wink.webp`
+voľné na ďalšie použitie (sekcie, sociálne siete, nálepky).
+Kvapko je spomínaný aj v textoch (kroky, footer, CTA). Tón je **vyvážene hravý** –
 osobnosť navrchu, ale ceny, kaucia a proces zostávajú jasné a dôveryhodné.
 Meno „Kvapko" vieš kedykoľvek zmeniť (nájdi/nahraď v `index.html` a `page-pozicajtepovac.php`).
 

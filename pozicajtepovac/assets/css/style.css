@@ -167,7 +167,7 @@ button { font: inherit; cursor: pointer; }
 
 /* Mascot Kvapko */
 .hero__mascot { position: relative; display: flex; justify-content: center; width: 100%; }
-.mascot { width: min(300px, 78%); height: auto; animation: mascot-float 4.5s ease-in-out infinite; }
+.mascot { display: block; width: min(330px, 82%); height: auto; margin-inline: auto; filter: drop-shadow(0 22px 30px rgba(15, 82, 186, .22)); animation: mascot-float 4.5s ease-in-out infinite; }
 @keyframes mascot-float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
 .speech {
   position: absolute; top: 6%; left: 4%; z-index: 2;
@@ -322,6 +322,7 @@ button { font: inherit; cursor: pointer; }
 /* ---------- CTA band ---------- */
 .cta-band { background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-dark) 100%); color: #fff; padding: 56px 0; }
 .cta-band__inner { text-align: center; max-width: 640px; margin-inline: auto; }
+.cta-band__mascot { display: block; width: 150px; height: auto; margin: 0 auto 18px; filter: drop-shadow(0 14px 22px rgba(0,0,0,.25)); }
 .cta-band__title { color: #fff; font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 800; }
 .cta-band__text { color: rgba(255,255,255,.9); font-size: 1.08rem; margin-bottom: 26px; }
 
